@@ -23,7 +23,8 @@
             "nodes" : [
                 0,
                 1,
-                2
+                2,
+                3
             ]
         }
     ],
@@ -38,7 +39,7 @@
             ]
         },
         {
-            "name" : "sphere.b1",
+            "name" : "sphere.b2",
             "scale" : [
                 3.8689076900482178,
                 3.8689076900482178,
@@ -53,15 +54,28 @@
         {
             "name" : "axis.b1",
             "rotation" : [
-                0,
-                0.40912190079689026,
-                0,
-                -0.9124797582626343
+                -0.6990675926208496,
+                0.021680915728211403,
+                -0.7145617008209229,
+                -0.015363823622465134
             ],
             "translation" : [
-                -29.17916488647461,
-                -83.61941528320312,
-                -30.572444915771484
+                -0.6344997882843018,
+                -0.4633970260620117,
+                1.1876009702682495
+            ]
+        },
+        {
+            "name" : "sphere.b1",
+            "scale" : [
+                5.029849052429199,
+                5.029849052429199,
+                5.029849052429199
+            ],
+            "translation" : [
+                0.017696380615234375,
+                -44.81111145019531,
+                -0.32914161682128906
             ]
         }
     ],
@@ -106,7 +120,7 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 2212,
+            "count" : 2275,
             "max" : [
                 74.47423553466797,
                 70.23665618896484,
@@ -122,58 +136,58 @@
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 2212,
+            "count" : 2275,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 2212,
+            "count" : 2275,
             "type" : "VEC4"
         },
         {
             "bufferView" : 3,
             "componentType" : 5126,
-            "count" : 2212,
+            "count" : 2275,
             "type" : "VEC2"
         },
         {
             "bufferView" : 4,
             "componentType" : 5123,
-            "count" : 12024,
+            "count" : 12204,
             "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 26544,
+            "byteLength" : 27300,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 26544,
-            "byteOffset" : 26544
+            "byteLength" : 27300,
+            "byteOffset" : 27300
         },
         {
             "buffer" : 0,
-            "byteLength" : 35392,
-            "byteOffset" : 53088
+            "byteLength" : 36400,
+            "byteOffset" : 54600
         },
         {
             "buffer" : 0,
-            "byteLength" : 17696,
-            "byteOffset" : 88480
+            "byteLength" : 18200,
+            "byteOffset" : 91000
         },
         {
             "buffer" : 0,
-            "byteLength" : 24048,
-            "byteOffset" : 106176
+            "byteLength" : 24408,
+            "byteOffset" : 109200
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 130224,
+            "byteLength" : 133608,
             "uri" : "worldB.bin"
         }
     ]

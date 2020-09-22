@@ -19,8 +19,8 @@ public class Car {
 	
 	public void updateAsPlayer(NavMesh navMesh, float delta){
 		if(space != null){
-			float moveSpeed = delta * 2 * 0.1f * 100;
-			float rotationSpeed = delta * 360 * .5f;
+			float moveSpeed = delta * 2 * 0.1f * 100 * 3;
+			float rotationSpeed = delta * 360 * .5f * .6f;
 			boolean changed = false;
 			if(Gdx.input.isKeyPressed(Input.Keys.UP)){
 				acceleration = 1;

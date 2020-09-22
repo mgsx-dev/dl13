@@ -9,16 +9,22 @@ import net.mgsx.dl13.model.GameWorld;
 public class GameScreen extends ScreenAdapter {
 	private GameWorld world;
 	private ObjectMap<String, GameWorld> worldMap = new ObjectMap<String, GameWorld>();
+	private boolean finishLine;
 	
 	public GameScreen() {
 		super();
 		for(String wID : GameAssets.WORLD_IDS){
 			GameWorld w = new GameWorld(wID);
 			worldMap.put(wID, w);
-			world = w; // take the last one
 		}
+		setInitWorld("E", "e0");
 	}
 	
+	private void setInitWorld(String wID, String axisID) {
+		world = worldMap.get("E");
+		world.resetPlayer(axisID);
+	}
+
 	@Override
 	public void render(float delta) {
 		world.update(delta);
@@ -36,13 +42,35 @@ public class GameScreen extends ScreenAdapter {
 			String nextWorldID = null;
 			String nextAxisID = null;
 			
-			
-			if(world.currentDoor.name.equals("b1")){
-				nextWorldID = "A";
-				nextAxisID = "a1";
-			}else if(world.currentDoor.name.equals("a1")){
+			// first wrap zone : startup to torus land
+			if(world.currentDoor.name.equals("e1")){
+				nextWorldID = "C";
+				nextAxisID = "c1";
+			}
+			// from torus to first land (reverse)
+			else if(world.currentDoor.name.equals("c1")){
+				nextWorldID = "E";
+				nextAxisID = "e1";
+			}
+			// from first land to parallel world
+			else if(world.currentDoor.name.equals("e2")){
 				nextWorldID = "B";
 				nextAxisID = "b1";
+			}
+			// from parallel world to first land, loop back (trap)
+			else if(world.currentDoor.name.equals("b1")){
+				nextWorldID = "E";
+				nextAxisID = "e2";
+			}
+			// from parallel world to first land, final area
+			else if(world.currentDoor.name.equals("b2")){
+				nextWorldID = "E";
+				nextAxisID = "e3";
+			}
+			// finish line
+			else if(world.currentDoor.name.equals("e3")){
+				finishLine = true;
+				// TODO no more controls, fade to title screen...
 			}
 			
 			if(nextWorldID != null && nextAxisID != null){

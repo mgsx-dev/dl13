@@ -113,10 +113,10 @@ public class GameWorld {
 		navMesh = indexer.build(points, MathUtils.FLOAT_ROUNDING_ERROR);
 		
 		// STARTUP POINT
-		player.space = navMesh.rayCast(new Ray(new Vector3(0, 1000, 0), new Vector3(0,-1,0)));
-		player.direction.set(player.space.normal).crs(player.space.triangle.edgeA.vector).nor(); // TODO fix direction at start ?
+		// player.space = navMesh.rayCast(new Ray(new Vector3(0, 1000, 0), new Vector3(0,-1,0)));
+		// player.direction.set(player.space.normal).crs(player.space.triangle.edgeA.vector).nor(); // TODO fix direction at start ?
 		
-		resetCamera();
+		// resetCamera();
 		
 		player.scene = new Scene(GameAssets.i.carA.scene);
 		sceneManager.addScene(player.scene);

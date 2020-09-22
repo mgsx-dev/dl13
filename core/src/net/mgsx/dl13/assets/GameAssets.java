@@ -10,7 +10,7 @@ import net.mgsx.gltf.scene3d.scene.SceneAsset;
 public class GameAssets {
 	public static GameAssets i;
 	
-	public static final String[] WORLD_IDS = {"E"}; // XXX {"A", "B", "C", "D"};
+	public static final String[] WORLD_IDS = {"B", "C", "E"};
 	
 	public SceneAsset carA, bonus;
 
