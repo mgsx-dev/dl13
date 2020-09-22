@@ -1,0 +1,180 @@
+{
+    "asset" : {
+        "copyright" : "mgsx",
+        "generator" : "Khronos glTF Blender I/O v1.2.75",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "extras" : {
+                "glTF2ExportSettings" : {
+                    "export_apply" : 1,
+                    "export_cameras" : 1,
+                    "export_copyright" : "mgsx",
+                    "export_extras" : 1,
+                    "export_format" : "GLTF_SEPARATE",
+                    "export_lights" : 1,
+                    "export_morph_tangent" : 1,
+                    "export_tangents" : 1
+                }
+            },
+            "name" : "Scene",
+            "nodes" : [
+                0,
+                1,
+                2
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "navMeshB",
+            "translation" : [
+                0,
+                -69.27842712402344,
+                0
+            ]
+        },
+        {
+            "name" : "sphere.b1",
+            "scale" : [
+                3.8689076900482178,
+                3.8689076900482178,
+                3.8689076900482178
+            ],
+            "translation" : [
+                9.97165298461914,
+                -83.69041442871094,
+                14.119140625
+            ]
+        },
+        {
+            "name" : "axis.b1",
+            "rotation" : [
+                0,
+                0.40912190079689026,
+                0,
+                -0.9124797582626343
+            ],
+            "translation" : [
+                -29.17916488647461,
+                -83.61941528320312,
+                -30.572444915771484
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "emissiveFactor" : [
+                0,
+                0,
+                0
+            ],
+            "name" : "Mirror",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.800000011920929,
+                    1
+                ],
+                "metallicFactor" : 0.37727272510528564,
+                "roughnessFactor" : 0.16818180680274963
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Plane",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TANGENT" : 2,
+                        "TEXCOORD_0" : 3
+                    },
+                    "indices" : 4,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 2212,
+            "max" : [
+                74.47423553466797,
+                70.23665618896484,
+                73.13552856445312
+            ],
+            "min" : [
+                -75.27117156982422,
+                -21.28681182861328,
+                -71.0862808227539
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 2212,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 2212,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5126,
+            "count" : 2212,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5123,
+            "count" : 12024,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 26544,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 26544,
+            "byteOffset" : 26544
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 35392,
+            "byteOffset" : 53088
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 17696,
+            "byteOffset" : 88480
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 24048,
+            "byteOffset" : 106176
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 130224,
+            "uri" : "worldB.bin"
+        }
+    ]
+}

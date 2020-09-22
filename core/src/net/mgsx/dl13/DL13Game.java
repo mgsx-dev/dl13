@@ -8,6 +8,8 @@ import net.mgsx.dl13.screens.GameScreen;
 public class DL13Game extends Game {
 	
 	
+	public static boolean debug = true;
+
 	@Override
 	public void create () {
 		GameAssets.i = new GameAssets();
