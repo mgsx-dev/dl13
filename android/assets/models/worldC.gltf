@@ -1,0 +1,138 @@
+{
+    "asset" : {
+        "copyright" : "mgsx",
+        "generator" : "Khronos glTF Blender I/O v1.2.75",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "extras" : {
+                "glTF2ExportSettings" : {
+                    "export_apply" : 1,
+                    "export_cameras" : 1,
+                    "export_copyright" : "mgsx",
+                    "export_extras" : 1,
+                    "export_format" : "GLTF_SEPARATE",
+                    "export_lights" : 1,
+                    "export_morph_tangent" : 1,
+                    "export_tangents" : 1
+                }
+            },
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "navMeshC",
+            "scale" : [
+                16.161785125732422,
+                16.161785125732422,
+                16.161785125732422
+            ],
+            "translation" : [
+                -12.298636436462402,
+                -36.2370491027832,
+                -4.611993789672852
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "emissiveFactor" : [
+                0,
+                0,
+                0
+            ],
+            "name" : "Mirror",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.800000011920929,
+                    1
+                ],
+                "metallicFactor" : 0.37727272510528564,
+                "roughnessFactor" : 0.16818180680274963
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "extras" : {
+                "TorusKnot" : 1,
+                "change" : 0,
+                "resolution" : 113,
+                "objecttype" : 2
+            },
+            "name" : "TorusKnot",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1
+                    },
+                    "indices" : 2,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 1243,
+            "max" : [
+                6.011543273925781,
+                2.1607139110565186,
+                4.217837333679199
+            ],
+            "min" : [
+                -6.143400192260742,
+                -2.6560428142547607,
+                -4.276910305023193
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 1243,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5123,
+            "count" : 7458,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 14916,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 14916,
+            "byteOffset" : 14916
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 14916,
+            "byteOffset" : 29832
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 44748,
+            "uri" : "worldC.bin"
+        }
+    ]
+}

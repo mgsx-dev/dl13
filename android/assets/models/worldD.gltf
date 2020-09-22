@@ -1,0 +1,229 @@
+{
+    "asset" : {
+        "copyright" : "mgsx",
+        "generator" : "Khronos glTF Blender I/O v1.2.75",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "extras" : {
+                "glTF2ExportSettings" : {
+                    "export_apply" : 1,
+                    "export_cameras" : 1,
+                    "export_copyright" : "mgsx",
+                    "export_extras" : 1,
+                    "export_format" : "GLTF_SEPARATE",
+                    "export_lights" : 1,
+                    "export_morph_tangent" : 1,
+                    "export_tangents" : 1
+                }
+            },
+            "name" : "Scene",
+            "nodes" : [
+                0,
+                1
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "navMeshD",
+            "scale" : [
+                37.82527542114258,
+                37.82527542114258,
+                37.82527542114258
+            ],
+            "translation" : [
+                -7.25114631652832,
+                -38.275875091552734,
+                0.8530760407447815
+            ]
+        },
+        {
+            "mesh" : 1,
+            "name" : "navMeshD.001",
+            "scale" : [
+                37.82527542114258,
+                37.82527542114258,
+                37.82527542114258
+            ],
+            "translation" : [
+                -7.25114631652832,
+                -38.275875091552734,
+                0.8530760407447815
+            ]
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Icosphere.005",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TANGENT" : 2,
+                        "TEXCOORD_0" : 3
+                    },
+                    "indices" : 4
+                }
+            ]
+        },
+        {
+            "name" : "Icosphere.006",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 5,
+                        "NORMAL" : 6,
+                        "TANGENT" : 7,
+                        "TEXCOORD_0" : 8
+                    },
+                    "indices" : 9
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 1609,
+            "max" : [
+                1.074724793434143,
+                1.1940726041793823,
+                1.0813689231872559
+            ],
+            "min" : [
+                -1.1292757987976074,
+                -1.1886234283447266,
+                -1.0121146440505981
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 1609,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 1609,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5126,
+            "count" : 1609,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5123,
+            "count" : 7950,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5126,
+            "count" : 42,
+            "max" : [
+                0.45173224806785583,
+                1.1764732599258423,
+                0.13718724250793457
+            ],
+            "min" : [
+                0.10634194314479828,
+                0.9597933888435364,
+                -0.14361579716205597
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5126,
+            "count" : 42,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 7,
+            "componentType" : 5126,
+            "count" : 42,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 8,
+            "componentType" : 5126,
+            "count" : 42,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 9,
+            "componentType" : 5123,
+            "count" : 54,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 19308,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 19308,
+            "byteOffset" : 19308
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 25744,
+            "byteOffset" : 38616
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 12872,
+            "byteOffset" : 64360
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 15900,
+            "byteOffset" : 77232
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 504,
+            "byteOffset" : 93132
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 504,
+            "byteOffset" : 93636
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 672,
+            "byteOffset" : 94140
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 336,
+            "byteOffset" : 94812
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 108,
+            "byteOffset" : 95148
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 95256,
+            "uri" : "worldD.bin"
+        }
+    ]
+}

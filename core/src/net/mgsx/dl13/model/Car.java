@@ -53,6 +53,14 @@ public class Car {
 			if(changed){
 				space.triangle = navMesh.clipToSurface(space.triangle, space.position, space.normal, direction);
 				if(space.triangle == null) space = null;
+				if(navMesh.clipToSurfaceOnEdge){
+					velocity *= .9f;
+					// make it bounce a bit
+					// TODO use tmp vector
+					Vector3 mirror = direction.cpy().mulAdd(navMesh.clipToSurfaceEdge, -2 * direction.dot(navMesh.clipToSurfaceEdge)).nor();
+					space.position.mulAdd(mirror, 100 * velocity * delta);
+					// direction.lerp(mirror, 1f);
+				}
 			}
 			
 			float s = 1f;

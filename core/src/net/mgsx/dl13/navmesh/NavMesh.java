@@ -3,7 +3,6 @@ package net.mgsx.dl13.navmesh;
 import java.util.Comparator;
 
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
@@ -156,8 +155,13 @@ public class NavMesh {
 	    return result.set(u, v, w);
 	}
 	
+	public boolean clipToSurfaceOnEdge;
+	public final Vector3 clipToSurfaceEdge = new Vector3();
+	
 	public Triangle clipToSurface(Triangle triangle, Vector3 position, Vector3 normal, Vector3 direction) 
 	{
+		clipToSurfaceOnEdge = false;
+		
 		Edge[] edges = new Edge[]{triangle.edgeA, triangle.edgeB, triangle.edgeC};
 		for(int i=0 ; i<3 ; i++){
 			Edge edge = edges[i];
@@ -172,7 +176,9 @@ public class NavMesh {
 				Triangle nextTriangle = edge.triangleA == triangle ? edge.triangleB : edge.triangleA;
 				if(nextTriangle == null){
 					float dot = delta0.dot(edge0);
-					position.set(edge.vertexA.position).mulAdd(edge0, MathUtils.clamp(dot, 0, 1));
+					position.set(edge.vertexA.position).mulAdd(edge0, dot);
+					clipToSurfaceOnEdge = true;
+					clipToSurfaceEdge.set(triangle.normal).crs(edge0).nor();
 				}else{
 					triangle = nextTriangle;
 				}

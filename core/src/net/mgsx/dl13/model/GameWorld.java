@@ -33,6 +33,8 @@ import net.mgsx.gltf.scene3d.scene.SceneSkybox;
 
 public class GameWorld {
 	
+	private final int nbBonus = 0; // XXX 100;
+	
 	private SceneManager sceneManager;
 	private PerspectiveCamera camera;
 	private Scene worldScene;
@@ -118,8 +120,6 @@ public class GameWorld {
 		
 		player.scene = new Scene(GameAssets.i.carA.scene);
 		sceneManager.addScene(player.scene);
-		
-		int nbBonus = 100;
 		
 		Array<Triangle> rndTriangle = new Array<Triangle>(navMesh.triangles);
 		for(int i=0 ; i<nbBonus && rndTriangle.size > 0 ; i++){

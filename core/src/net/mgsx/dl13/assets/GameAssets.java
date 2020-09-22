@@ -10,7 +10,9 @@ import net.mgsx.gltf.scene3d.scene.SceneAsset;
 public class GameAssets {
 	public static GameAssets i;
 	
-	public SceneAsset worldA, carA, bonus, worldB;
+	public static final String[] WORLD_IDS = {"E"}; // XXX {"A", "B", "C", "D"};
+	
+	public SceneAsset carA, bonus;
 
 	public Texture brdfLUT;
 
@@ -24,11 +26,9 @@ public class GameAssets {
 		
 		moonlessGolf = new IBL("ibl/moonless_golf_2k");
 		
-		worldA = new GLTFLoader().load(Gdx.files.internal("models/worldA.gltf"));
-		worldB = new GLTFLoader().load(Gdx.files.internal("models/worldB.gltf"));
-		
-		worldMap.put("A", worldA);
-		worldMap.put("B", worldB);
+		for(String wID : WORLD_IDS){
+			worldMap.put(wID, new GLTFLoader().load(Gdx.files.internal("models/world" + wID + ".gltf")));
+		}
 		
 		carA = new GLTFLoader().load(Gdx.files.internal("models/carA.gltf"));
 		

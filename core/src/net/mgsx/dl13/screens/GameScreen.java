@@ -3,6 +3,7 @@ package net.mgsx.dl13.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.mgsx.dl13.assets.GameAssets;
 import net.mgsx.dl13.model.GameWorld;
 
 public class GameScreen extends ScreenAdapter {
@@ -11,9 +12,11 @@ public class GameScreen extends ScreenAdapter {
 	
 	public GameScreen() {
 		super();
-		worldMap.put("A", new GameWorld("A"));
-		worldMap.put("B", new GameWorld("B"));
-		world = worldMap.get("B");
+		for(String wID : GameAssets.WORLD_IDS){
+			GameWorld w = new GameWorld(wID);
+			worldMap.put(wID, w);
+			world = w; // take the last one
+		}
 	}
 	
 	@Override
