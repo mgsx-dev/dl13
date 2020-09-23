@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.ObjectMap;
 
@@ -31,7 +32,7 @@ import net.mgsx.gltf.scene3d.scene.SceneAsset;
 import net.mgsx.gltf.scene3d.scene.SceneManager;
 import net.mgsx.gltf.scene3d.scene.SceneSkybox;
 
-public class GameWorld {
+public class GameWorld implements Disposable {
 	
 	private final int nbBonus = 0; // XXX 100;
 	
@@ -101,7 +102,7 @@ public class GameWorld {
 		sceneManager.addScene(worldScene);
 		
 		// ENV
-		IBL ibl = GameAssets.i.moonlessGolf;
+		IBL ibl = GameAssets.i.demo2;
 		
 		sceneManager.environment.set(PBRCubemapAttribute.createDiffuseEnv(ibl.diffuseCubemap));
 		sceneManager.environment.set(PBRCubemapAttribute.createSpecularEnv(ibl.specularCubemap));
@@ -130,7 +131,7 @@ public class GameWorld {
 		
 		// resetCamera();
 		
-		player.scene = new Scene(GameAssets.i.carA.scene);
+		player.scene = new Scene(game.getCarModel());
 		sceneManager.addScene(player.scene);
 		
 		Array<Triangle> rndTriangle = new Array<Triangle>(navMesh.triangles);
@@ -145,6 +146,11 @@ public class GameWorld {
 			bonusList.add(bonus);
 			sceneManager.getRenderableProviders().add(bonus.model);
 		}
+	}
+	
+	@Override
+	public void dispose() {
+		sceneManager.dispose();
 	}
 	
 	private final Vector3 camDirectionTarget = new Vector3();

@@ -3,10 +3,13 @@ package net.mgsx.dl13;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Json;
 
 import net.mgsx.dl13.assets.GameAssets;
 import net.mgsx.dl13.screens.GameScreen;
+import net.mgsx.dl13.screens.SelectScreen;
+import net.mgsx.dl13.screens.TitleScreen;
 import net.mgsx.dl13.store.GameStore;
 
 public class DL13Game extends Game {
@@ -16,7 +19,13 @@ public class DL13Game extends Game {
 	private GameStore store;
 	
 	public static boolean debug = true;
+	
+	public static enum ScreenState{
+		TITLE, SELECT, GAME
+	}
 
+	private ScreenState nextState; 
+	
 	public static void save(){
 		((DL13Game)Gdx.app.getApplicationListener()).saveStore();
 	}
@@ -25,7 +34,9 @@ public class DL13Game extends Game {
 	public void create () {
 		GameAssets.i = new GameAssets();
 		loadStore();
-		newGame();
+		setScreenState(ScreenState.TITLE);
+		// setScreenState(ScreenState.GAME);
+		// setScreenState(ScreenState.SELECT);
 	}
 
 	private void loadStore() {
@@ -46,12 +57,33 @@ public class DL13Game extends Game {
 		pref.flush();
 	}
 
-	public static void toTitleScreen() {
-		((DL13Game)Gdx.app.getApplicationListener()).newGame(); // TODO title screen
+	public static void toScreen(ScreenState state) {
+		((DL13Game)Gdx.app.getApplicationListener()).nextState = state;
+	}
+	private void setScreenState(ScreenState state){
+		Screen lastScreen = screen;
+		switch(state){
+		default:
+		case GAME:
+			setScreen(new GameScreen(store));
+			break;
+		case SELECT:
+			setScreen(new SelectScreen(store));
+			break;
+		case TITLE:
+			setScreen(new TitleScreen(store));
+			break;
+		}
+		if(lastScreen != null) lastScreen.dispose();
 	}
 
-	private void newGame() {
-		setScreen(new GameScreen(store));
+	@Override
+	public void render() {
+		super.render();
+		if(nextState != null){
+			setScreenState(nextState);
+			nextState = null;
+		}
 	}
 
 }

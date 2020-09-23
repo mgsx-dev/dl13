@@ -3,6 +3,7 @@ package net.mgsx.dl13.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import net.mgsx.dl13.DL13Game;
@@ -32,8 +33,14 @@ public class GameScreen extends StageScreen {
 		hud.setFillParent(true);
 		
 		hud.launchCountDown();
-		
-		// game.running = true; // TODO count down
+	}
+	
+	@Override
+	public void dispose() {
+		for(Entry<String, GameWorld> entry : worldMap){
+			entry.value.dispose();
+		}
+		super.dispose();
 	}
 	
 	private void setInitWorld(String wID, String axisID) {

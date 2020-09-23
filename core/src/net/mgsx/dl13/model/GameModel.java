@@ -2,10 +2,19 @@ package net.mgsx.dl13.model;
 
 import java.util.Comparator;
 
+import net.mgsx.dl13.assets.GameAssets;
 import net.mgsx.dl13.store.GameRecord;
 import net.mgsx.dl13.store.GameStore;
+import net.mgsx.gltf.scene3d.scene.SceneModel;
 
 public class GameModel {
+	
+	public static enum CarStyle{
+		A,B,C
+	}
+	
+	public static CarStyle preferredCarStyle = CarStyle.B;
+	
 	public final GameStore store;
 	public float time;
 	public int bonus;
@@ -33,6 +42,18 @@ public class GameModel {
 			}
 		});
 		isNewRecord = record == store.records.first();
+	}
+
+	public SceneModel getCarModel() {
+		switch(preferredCarStyle){
+		default:
+		case A:
+			return GameAssets.i.carA.scene;
+		case B:
+			return GameAssets.i.carB.scene;
+		case C:
+			return GameAssets.i.carC.scene;
+		}
 	}
 
 }

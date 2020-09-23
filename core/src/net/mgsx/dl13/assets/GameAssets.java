@@ -13,11 +13,11 @@ public class GameAssets {
 	
 	public static final String[] WORLD_IDS = {"B", "C", "E"};
 	
-	public SceneAsset carA, bonus;
+	public SceneAsset carA, carB, carC, bonus;
 
 	public Texture brdfLUT;
 
-	public IBL moonlessGolf;
+	public IBL moonlessGolf, demo2;
 	
 	private ObjectMap<String, SceneAsset> worldMap = new ObjectMap<String, SceneAsset>();
 
@@ -30,12 +30,15 @@ public class GameAssets {
 		brdfLUT = new Texture(Gdx.files.classpath("net/mgsx/gltf/shaders/brdfLUT.png"));
 		
 		moonlessGolf = new IBL("ibl/moonless_golf_2k");
+		demo2 = new IBL("ibl/demo2");
 		
 		for(String wID : WORLD_IDS){
 			worldMap.put(wID, new GLTFLoader().load(Gdx.files.internal("models/world" + wID + ".gltf")));
 		}
 		
 		carA = new GLTFLoader().load(Gdx.files.internal("models/carA.gltf"));
+		carB = new GLTFLoader().load(Gdx.files.internal("models/carB.gltf"));
+		carC = new GLTFLoader().load(Gdx.files.internal("models/carC.gltf"));
 		
 		bonus = new GLTFLoader().load(Gdx.files.internal("models/bonus.gltf"));
 	}

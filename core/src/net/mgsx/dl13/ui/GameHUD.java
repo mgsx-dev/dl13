@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
 import net.mgsx.dl13.DL13Game;
+import net.mgsx.dl13.DL13Game.ScreenState;
 import net.mgsx.dl13.model.GameModel;
 import net.mgsx.dl13.store.GameRecord;
 
@@ -119,7 +120,7 @@ public class GameHUD extends Table
 		t.row();
 		
 		actors.add(t.add("Bonus:").getActor());
-		actors.add(t.add(String.valueOf(currentRecord.bonus)).getActor());
+		actors.add(t.add(formatBonus(currentRecord.bonus)).getActor());
 		t.row();
 		
 		actors.add(t.add("Final time:").getActor());
@@ -134,16 +135,39 @@ public class GameHUD extends Table
 			actors.add(t.add(formatTime(game.store.records.first().score)).getActor());
 			t.row();
 		}
-		TextButton btOK = new TextButton("OK", getSkin());
-		actors.add(t.add(btOK).colspan(2).expandX().getActor());
-		t.row();
-		
-		btOK.addListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent event, Actor actor) {
-				DL13Game.toTitleScreen();
-			}
-		});
+		{
+			TextButton btOK = new TextButton("Try again", getSkin());
+			actors.add(t.add(btOK).colspan(2).expandX().getActor());
+			t.row();
+			btOK.addListener(new ChangeListener() {
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					DL13Game.toScreen(ScreenState.GAME);
+				}
+			});
+		}
+		{
+			TextButton btOK = new TextButton("Change car", getSkin());
+			actors.add(t.add(btOK).colspan(2).expandX().getActor());
+			t.row();
+			btOK.addListener(new ChangeListener() {
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					DL13Game.toScreen(ScreenState.SELECT);
+				}
+			});
+		}
+		{
+			TextButton btOK = new TextButton("Title screen", getSkin());
+			actors.add(t.add(btOK).colspan(2).expandX().getActor());
+			t.row();
+			btOK.addListener(new ChangeListener() {
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					DL13Game.toScreen(ScreenState.TITLE);
+				}
+			});
+		}
 		
 		
 		t.pack();
@@ -158,7 +182,7 @@ public class GameHUD extends Table
 		}
 	}
 
-	private String formatTime(float time) {
+	public static String formatTime(float time) {
 		int min = MathUtils.floor(time / 60);
 		time -= min * 60;
 		int sec = MathUtils.floor(time);
