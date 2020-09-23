@@ -1,0 +1,39 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: { 
+	default-font: { file: default.fnt } 
+	title-font: { file: title.fnt } 
+},
+com.badlogic.gdx.graphics.Color: {
+	green: { a: 1, b: 0, g: 1, r: 0 },
+	white: { a: 1, b: 1, g: 1, r: 1 },
+	red: { a: 1, b: 0, g: 0, r: 1 },
+	black: { a: 1, b: 0, g: 0, r: 0 },
+	disabled: { a: 1, b: 0, g: 0, r: 1 }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
+	dialogDim: { name: white, color: { r: 0, g: 0, b: 0, a: 0.45 } },
+},
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+	default: { font: default-font, fontColor: white }
+	title: { font: title-font, fontColor: white }
+},
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: { down: default-round-down, up: default-round, disabled: default-round-disabled , font: default-font, fontColor: white, disabledFontColor: disabled },
+	toggle: { down: default-round-down, up: default-round, checked: default-round-down, disabled: default-round-disabled, font: default-font, fontColor: white, disabledFontColor: disabled }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+	default: { down: default-round-down, up: default-round, disabled: default-round-disabled  },
+	toggle: { down: default-round-down, up: default-round, checked: default-round-down, disabled: default-round-disabled }
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+	default: { vScroll: default-scroll, hScrollKnob: default-round, background: default-dropdown, hScroll: default-scroll, vScrollKnob: default-round }
+},
+com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
+	default: {
+		font: default-font, fontColor: white, background: default-select,
+		scrollStyle: default,
+		listStyle: { font: default-font, selection: default-select-selection }
+	}
+},
+}

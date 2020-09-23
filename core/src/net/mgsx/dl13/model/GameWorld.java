@@ -41,7 +41,7 @@ public class GameWorld {
 	private SceneSkybox skybox;
 	private DirectionalLightEx sunLight;
 	private NavMesh navMesh;
-	public final Car player = new Car();
+	public final Car player;
 	private Vector3 smoothPos = new Vector3();
 	private final Array<Bonus> bonusList = new Array<Bonus>();
 	private float time;
@@ -49,12 +49,16 @@ public class GameWorld {
 	private final Array<WrapDoor> doorList = new Array<WrapDoor>();
 	public WrapDoor currentDoor = null;
 	private ObjectMap<String, Node> axisMap = new ObjectMap<String, Node>();
-	private float fovTarget = 90;
+	private float fovTarget;
+
+	private GameModel game;
 	
-	public GameWorld(String worldID) {
+	public GameWorld(GameModel game, String worldID) {
 		SceneAsset worldAsset = GameAssets.i.world(worldID);
 		String navMeshName = "navMesh" + worldID;
 		
+		this.game = game;
+		player = new Car(game);
 		
 		sceneManager = new SceneManager(12);
 		sceneManager.camera = camera = new PerspectiveCamera(60, 1, 1);
@@ -80,6 +84,14 @@ public class GameWorld {
 				String name = node.id.split("\\.")[1];
 				worldScene.modelInstance.nodes.removeIndex(i);
 				axisMap.put(name, node);
+			}else if(node.id.startsWith("bonus.")){
+				worldScene.modelInstance.nodes.removeIndex(i);
+				Bonus bonus = new Bonus();
+				bonus.model = new ModelInstanceHack(GameAssets.i.bonus.scene.model, "bonusRed");
+				bonus.position.set(node.translation);
+				bonus.model.transform.setToTranslation(bonus.position);
+				bonusList.add(bonus);
+				sceneManager.getRenderableProviders().add(bonus.model);
 			}else{
 				i++;
 			}
@@ -172,7 +184,7 @@ public class GameWorld {
 			camera.direction.slerp(camDirectionTarget, MathUtils.clamp(delta * 10, 0, 1));
 			camera.up.slerp(camUpTarget, MathUtils.clamp(delta * 10, 0, 1));
 			
-			float cameraForce = 1;
+			float cameraForce = 3;
 			
 			smoothPos.lerp(player.space.position, delta * 3f * cameraForce);
 			applyCameraPosition();
@@ -191,6 +203,7 @@ public class GameWorld {
 		for(Bonus bonus : bonusHitList){
 			bonusList.removeValue(bonus, true);
 			sceneManager.getRenderableProviders().removeValue(bonus.model, true);
+			game.bonus++;
 		}
 		bonusHitList.clear();
 		
@@ -231,7 +244,7 @@ public class GameWorld {
 		sceneManager.render();
 	}
 
-	public void resetPlayer(String axisID) {
+	public void resetPlayer(String axisID, boolean wrapZone) {
 		Node axis = axisMap.get(axisID);
 		axis.calculateWorldTransform();
 		
@@ -247,8 +260,8 @@ public class GameWorld {
 
 		resetCamera();
 		
-		camera.fieldOfView = 180;
 		fovTarget = 90;
+		camera.fieldOfView = wrapZone ? 180 : fovTarget;
 	}
 	
 	private void resetCamera() {

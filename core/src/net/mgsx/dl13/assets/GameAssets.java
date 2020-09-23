@@ -2,6 +2,7 @@ package net.mgsx.dl13.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.mgsx.gltf.loaders.gltf.GLTFLoader;
@@ -19,8 +20,12 @@ public class GameAssets {
 	public IBL moonlessGolf;
 	
 	private ObjectMap<String, SceneAsset> worldMap = new ObjectMap<String, SceneAsset>();
+
+	public Skin skin;
 	
 	public GameAssets() {
+		
+		skin = new Skin(Gdx.files.internal("skins/game-skin.json"));
 		
 		brdfLUT = new Texture(Gdx.files.classpath("net/mgsx/gltf/shaders/brdfLUT.png"));
 		

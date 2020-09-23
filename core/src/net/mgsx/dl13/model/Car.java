@@ -17,6 +17,13 @@ public class Car {
 	public float acceleration = 0;
 	public float velocity = 0;
 	
+	private GameModel game;
+	
+	public Car(GameModel game) {
+		super();
+		this.game = game;
+	}
+
 	public void updateAsPlayer(NavMesh navMesh, float delta){
 		if(space != null){
 			float moveSpeed = delta * 2 * 0.1f * 100 * 3;
@@ -24,26 +31,28 @@ public class Car {
 			boolean changed = false;
 			if(Gdx.input.isKeyPressed(Input.Keys.UP)){
 				acceleration = 1;
-				// space.position.mulAdd(direction, moveSpeed);
-				changed = true;
 			}
 			else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
 				acceleration = -.5f;
-				// space.position.mulAdd(direction, -moveSpeed);
-				changed = true;
 			}else{
 				acceleration = 0;
 			}
-			if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-				direction.rotate(space.normal, rotationSpeed);
-			}
-			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-				direction.rotate(space.normal, -rotationSpeed);
+			
+			game.speed = Math.abs(velocity);
+			
+			if(game.running){
+				if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+					direction.rotate(space.normal, rotationSpeed);
+				}
+				if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+					direction.rotate(space.normal, -rotationSpeed);
+				}
+				
 			}
 			
 			// damping/friction
 			velocity = MathUtils.lerp(velocity, 0, delta * .5f);
-			velocity += acceleration * delta * .3f;
+			if(game.running) velocity += acceleration * delta * .3f;
 			velocity = MathUtils.clamp(velocity, -moveSpeed/2, moveSpeed);
 			space.position.mulAdd(direction, velocity);
 			changed = true;

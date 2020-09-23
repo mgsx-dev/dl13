@@ -1,0 +1,99 @@
+
+game-skin.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+default
+  rotate: false
+  xy: 2, 38
+  size: 512, 64
+  orig: 512, 64
+  offset: 0, 0
+  index: -1
+default-dropdown
+  rotate: false
+  xy: 557, 600
+  size: 14, 16
+  split: 6, 6, 8, 7
+  pad: 5, 5, 5, 5
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+default-rect
+  rotate: false
+  xy: 2, 2
+  size: 14, 16
+  split: 6, 6, 8, 7
+  pad: 5, 5, 5, 5
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+default-round
+  rotate: false
+  xy: 516, 559
+  size: 16, 16
+  split: 7, 7, 8, 7
+  pad: 6, 6, 6, 5
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+default-round-disabled
+  rotate: false
+  xy: 20, 20
+  size: 14, 16
+  split: 6, 6, 8, 7
+  pad: 5, 5, 5, 5
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+default-round-down
+  rotate: false
+  xy: 2, 20
+  size: 16, 16
+  split: 7, 7, 8, 7
+  pad: 6, 6, 6, 5
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+default-scroll
+  rotate: false
+  xy: 516, 541
+  size: 14, 16
+  split: 6, 6, 8, 7
+  pad: 5, 5, 5, 5
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+default-select
+  rotate: false
+  xy: 516, 577
+  size: 39, 39
+  split: 7, 31, 16, 22
+  pad: 6, 32, 6, 5
+  orig: 39, 39
+  offset: 0, 0
+  index: -1
+default-select-selection
+  rotate: false
+  xy: 534, 559
+  size: 14, 16
+  split: 6, 6, 8, 7
+  pad: 5, 5, 5, 5
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+title
+  rotate: false
+  xy: 2, 104
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+white
+  rotate: false
+  xy: 557, 595
+  size: 3, 3
+  orig: 3, 3
+  offset: 0, 0
+  index: -1

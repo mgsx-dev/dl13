@@ -1,32 +1,57 @@
 package net.mgsx.dl13.screens;
 
-import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import net.mgsx.dl13.DL13Game;
 import net.mgsx.dl13.assets.GameAssets;
+import net.mgsx.dl13.model.GameModel;
 import net.mgsx.dl13.model.GameWorld;
+import net.mgsx.dl13.store.GameStore;
+import net.mgsx.dl13.ui.GameHUD;
+import net.mgsx.dl13.utils.StageScreen;
 
-public class GameScreen extends ScreenAdapter {
+public class GameScreen extends StageScreen {
 	private GameWorld world;
 	private ObjectMap<String, GameWorld> worldMap = new ObjectMap<String, GameWorld>();
-	private boolean finishLine;
+	private GameModel game;
+	private GameHUD hud;
 	
-	public GameScreen() {
-		super();
+	public GameScreen(GameStore store) {
+		super(new FitViewport(640, 480));
+		game = new GameModel(store);
 		for(String wID : GameAssets.WORLD_IDS){
-			GameWorld w = new GameWorld(wID);
+			GameWorld w = new GameWorld(game, wID);
 			worldMap.put(wID, w);
 		}
 		setInitWorld("E", "e0");
+		hud = new GameHUD(game, GameAssets.i.skin);
+		stage.addActor(hud);
+		hud.setFillParent(true);
+		
+		hud.launchCountDown();
+		
+		// game.running = true; // TODO count down
 	}
 	
 	private void setInitWorld(String wID, String axisID) {
 		world = worldMap.get("E");
-		world.resetPlayer(axisID);
+		world.resetPlayer(axisID, false);
 	}
 
 	@Override
 	public void render(float delta) {
+		if(DL13Game.debug){
+			if(Gdx.input.isKeyJustPressed(Input.Keys.G)) finish();
+		}
+		
+		
+		if(game.running){
+			game.time += delta;
+		}
+		
 		world.update(delta);
 		
 		world.render();
@@ -38,7 +63,7 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 	private void handleDoor() {
-		if(world.currentDoor != null){
+		if(world.currentDoor != null && game.running){
 			String nextWorldID = null;
 			String nextAxisID = null;
 			
@@ -69,20 +94,25 @@ public class GameScreen extends ScreenAdapter {
 			}
 			// finish line
 			else if(world.currentDoor.name.equals("e3")){
-				finishLine = true;
-				// TODO no more controls, fade to title screen...
+				finish();
 			}
+			world.currentDoor = null;
 			
 			if(nextWorldID != null && nextAxisID != null){
-				
 				GameWorld oldWorld = world;
-				oldWorld.currentDoor = null;
 				world = worldMap.get(nextWorldID);
 				// change car position and synchronize
-				world.resetPlayer(nextAxisID);
+				world.resetPlayer(nextAxisID, true);
 				world.player.sync(oldWorld.player);
 			}
-			
 		}
+	}
+
+	private void finish() {
+		game.finishLine = true;
+		game.running = false;
+		game.newRecord();
+		DL13Game.save();
+		hud.spawnFinish();
 	}
 }
