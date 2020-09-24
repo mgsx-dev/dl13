@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 
+import net.mgsx.dl13.assets.GameAssets;
 import net.mgsx.dl13.navmesh.NavMesh;
 import net.mgsx.dl13.navmesh.NavMesh.RayCastResult;
 import net.mgsx.gltf.scene3d.scene.Scene;
@@ -18,6 +19,7 @@ public class Car {
 	public float velocity = 0;
 	
 	private GameModel game;
+	private float collisionTimeout;
 	
 	public Car(GameModel game) {
 		super();
@@ -25,6 +27,8 @@ public class Car {
 	}
 
 	public void updateAsPlayer(NavMesh navMesh, float delta){
+		collisionTimeout -= delta;
+		
 		if(space != null){
 			float moveSpeed = delta * 2 * 0.1f * 100 * 3;
 			float rotationSpeed = delta * 360 * .5f * .6f;
@@ -74,6 +78,10 @@ public class Car {
 					// direction.lerp(mirror, 1f);
 					if(!mirror.isZero() && game.running) direction.lerp(mirror, 0.5f);
 					
+					if(collisionTimeout <= 0 && game.running){
+						GameAssets.i.collisionSound.play();
+						collisionTimeout = .3f;
+					}
 				}
 			}
 			

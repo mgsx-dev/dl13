@@ -80,6 +80,7 @@ public class TitleScreen extends StageScreen
 		btPlay.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				GameAssets.i.playUI();
 				DL13Game.toScreen(ScreenState.SELECT);
 			}
 		});
@@ -111,6 +112,12 @@ public class TitleScreen extends StageScreen
 		sceneManager.environment.add(sunLight);
 		
 		sceneManager.addScene(scene = new Scene(GameAssets.i.world("E").scene));
+	}
+	
+	@Override
+	public void show() {
+		GameAssets.i.playSongMenu();
+		super.show();
 	}
 	
 	@Override
@@ -160,7 +167,10 @@ public class TitleScreen extends StageScreen
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		sceneManager.render();
 		
+		viewport.apply();
 		super.render(delta);
+		
+		
 		if(sunLight instanceof DirectionalShadowLight && false){
 			Texture map = (Texture)((DirectionalShadowLight) sunLight).getDepthMap().texture;
 			batch.getProjectionMatrix().setToOrtho2D(0, 0, 1, 1);

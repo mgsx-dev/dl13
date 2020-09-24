@@ -71,6 +71,7 @@ public class SelectScreen extends StageScreen {
 				public void changed(ChangeEvent event, Actor actor) {
 					if(btCar.isChecked()){
 						changeCar(index);
+						GameAssets.i.playUI();
 					}
 				}
 			});
@@ -83,6 +84,7 @@ public class SelectScreen extends StageScreen {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				DL13Game.toScreen(ScreenState.GAME);
+				GameAssets.i.playUIHard();
 			}
 		});
 		
@@ -124,6 +126,12 @@ public class SelectScreen extends StageScreen {
 		
 		carModel = carModels.get(GameModel.preferredCarStyle.ordinal());
 		sceneManager.addScene(carModel);
+	}
+	
+	@Override
+	public void show() {
+		GameAssets.i.playSongMenu();
+		super.show();
 	}
 	
 	@Override
@@ -173,6 +181,7 @@ public class SelectScreen extends StageScreen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		sceneManager.render();
 		
+		viewport.apply();
 		super.render(delta);
 	}
 }

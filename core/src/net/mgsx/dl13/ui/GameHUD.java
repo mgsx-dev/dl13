@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Array;
 
 import net.mgsx.dl13.DL13Game;
 import net.mgsx.dl13.DL13Game.ScreenState;
+import net.mgsx.dl13.assets.GameAssets;
 import net.mgsx.dl13.model.GameModel;
 import net.mgsx.dl13.store.GameRecord;
 
@@ -35,37 +36,40 @@ public class GameHUD extends Table
 		Table t = new Table();
 		t.add(speedCounter).width(130);
 		t.add(timeCounter).expandX().width(130);  // TODO use monospace font instead
-		t.add(bonusCounter).width(130);
+		t.add(bonusCounter).width(250);
 		
 		add(t).expandY().top().growX();
 	}
 	
 	public void launchCountDown(){
 		addAction(Actions.sequence(
-			launchWord("GET READY!", 1f),
+			launchWord("GET READY!", 1f, false),
 			Actions.delay(2),
-			launchWord("3", 0),
+			launchWord("3", 0, true),
 			Actions.delay(1),
-			launchWord("2", 0),
+			launchWord("2", 0, true),
 			Actions.delay(1),
-			launchWord("1", 0),
+			launchWord("1", 0, true),
 			Actions.delay(1),
-			launchWord("GO!", 1),
+			launchWord("GO!", 1, false),
 			Actions.run(()->{
 				game.running = true;
+				GameAssets.i.playSongGame();
 			})));
 	}
 	
-	private Action launchWord(String word, float holdTime) {
-		return Actions.run(()->spawnWord(word, holdTime));
+	private Action launchWord(String word, float holdTime, boolean sfx) {
+		return Actions.run(()->spawnWord(word, holdTime, sfx));
 	}
 
-	private void spawnWord(String word, float holdTime) {
+	private void spawnWord(String word, float holdTime, boolean sfx) {
 		final Label label = new Label(word, getSkin());
 		label.pack();
 		getStage().addActor(label);
 		label.setPosition(getStage().getWidth()/2, getStage().getHeight()/2, Align.center);
 		label.setOrigin(Align.center);
+		
+		if(sfx) GameAssets.i.bonusSoundSoft.play(.5f);
 		
 		label.addAction(Actions.sequence(
 			Actions.delay(holdTime),
@@ -85,7 +89,7 @@ public class GameHUD extends Table
 		if(value == 0){
 			return "No bonus";
 		}else{
-			return "-" + value + "s";
+			return value + "s";
 		}
 	}
 	
@@ -108,7 +112,7 @@ public class GameHUD extends Table
 		Table t = new Table(getSkin());
 		
 		t.setBackground("default-scroll");
-		t.defaults().pad(4);
+		t.defaults().pad(10);
 		
 		Array<Actor> actors = new Array<Actor>();
 		

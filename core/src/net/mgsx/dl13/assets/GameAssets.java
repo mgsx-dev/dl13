@@ -1,6 +1,8 @@
 package net.mgsx.dl13.assets;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ObjectMap;
@@ -23,6 +25,11 @@ public class GameAssets {
 
 	public Skin skin;
 	
+	public Sound carSound, collisionSound, inSound, outSound, bonusSoundSoft, bonusSoundHard, uiSound, finishSound;
+	public Music mainSong;
+
+	private Music currentSong;
+	
 	public GameAssets() {
 		
 		skin = new Skin(Gdx.files.internal("skins/game-skin.json"));
@@ -42,9 +49,52 @@ public class GameAssets {
 		carC = new GLTFLoader().load(Gdx.files.internal("models/carC.gltf"));
 		
 		bonus = new GLTFLoader().load(Gdx.files.internal("models/bonus.gltf"));
+		
+		carSound = Gdx.audio.newSound(Gdx.files.internal("sfx/cars3.wav")); // le 3 est bien
+		inSound = Gdx.audio.newSound(Gdx.files.internal("sfx/in.wav"));
+		outSound = Gdx.audio.newSound(Gdx.files.internal("sfx/out.wav"));
+		collisionSound = Gdx.audio.newSound(Gdx.files.internal("sfx/collision.wav"));
+		bonusSoundSoft = Gdx.audio.newSound(Gdx.files.internal("sfx/bonus4.wav"));
+		bonusSoundHard = Gdx.audio.newSound(Gdx.files.internal("sfx/bonus3.wav"));
+		uiSound = Gdx.audio.newSound(Gdx.files.internal("sfx/ui-short.wav"));
+		finishSound = Gdx.audio.newSound(Gdx.files.internal("sfx/good.mp3"));
+
+		
+		mainSong = Gdx.audio.newMusic(Gdx.files.internal("music/MRmenu1.mp3"));
+		
 	}
 
 	public SceneAsset world(String worldID) {
 		return worldMap.get(worldID);
+	}
+
+	public void playUI() {
+		uiSound.play(0.3f);
+	}
+	public void playUIHard() {
+		bonusSoundHard.play(0.5f);
+	}
+
+	public void playSongGame() {
+		playSong(mainSong);
+		
+	}
+	public void playSongMenu() {
+		playSong(mainSong);
+	}
+	private void playSong(Music song){
+		if(currentSong == song) return;
+		stopSong();
+		currentSong = song;
+		song.setLooping(true);
+		song.play();
+	}
+
+	public void stopSong() {
+		if(currentSong!= null){
+			currentSong.stop();
+			currentSong = null;
+		}
+		
 	}
 }
