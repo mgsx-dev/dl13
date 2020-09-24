@@ -3,7 +3,10 @@ package net.mgsx.dl13.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -37,9 +40,12 @@ public class TitleScreen extends StageScreen
 	private DirectionalLightEx sunLight;
 	private float time;
 	private Scene scene;
+	private SpriteBatch batch;
 	
 	public TitleScreen(GameStore store) {
 		super(new FitViewport(DL13Game.UIWidth, DL13Game.UIHeight));
+		
+		batch = new SpriteBatch();
 	
 		Skin skin = GameAssets.i.skin;
 		
@@ -117,13 +123,32 @@ public class TitleScreen extends StageScreen
 	public void render(float delta) {
 		time += delta;
 		
+		sceneManager.setAmbientLight(.7f);
+		if(sunLight instanceof DirectionalShadowLight){
+			float s = 300;
+			BoundingBox bbox = new BoundingBox(new Vector3(-s,-s,-s), new Vector3(s,s,s));
+			// ((DirectionalShadowLight) sunLight).setViewport(30, 30, 1f, 100f);
+			// ((DirectionalShadowLight) sunLight).setCenter(Vector3.Zero);
+			
+			((DirectionalShadowLight) sunLight).setBounds(bbox);
+			/*
+			int shadowMapSize = 2048;
+			((DirectionalShadowLight) sunLight).setShadowMapSize(shadowMapSize, shadowMapSize);
+			
+			((DirectionalShadowLight) sunLight).setCenter(Vector3.Zero);
+			*/
+			sceneManager.environment.set(new PBRFloatAttribute(PBRFloatAttribute.ShadowBias, 1 / 50f));
+		}
+		sunLight.intensity = 3;
+		sunLight.direction.set(2,-3,2).nor();
+		
 		scene.modelInstance.transform.idt().rotate(Vector3.Y, time * -10).translate(100, 0, 0);
 		
 		camera.viewportWidth = Gdx.graphics.getWidth();
 		camera.viewportHeight = Gdx.graphics.getHeight();
 
-		float d = 250;
-		camera.position.set(d,d/2,d);
+		float d = 275;
+		camera.position.set(d,d * 0.6f,d);
 		camera.up.set(Vector3.Y);
 		camera.lookAt(new Vector3(0, 2, 0));
 		
@@ -136,5 +161,12 @@ public class TitleScreen extends StageScreen
 		sceneManager.render();
 		
 		super.render(delta);
+		if(sunLight instanceof DirectionalShadowLight && false){
+			Texture map = (Texture)((DirectionalShadowLight) sunLight).getDepthMap().texture;
+			batch.getProjectionMatrix().setToOrtho2D(0, 0, 1, 1);
+			batch.begin();
+			batch.draw(map, 0, 0, 1, 1, 0, 0, 1, 1);
+			batch.end();
+		}
 	}
 }

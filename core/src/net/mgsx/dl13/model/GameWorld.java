@@ -226,24 +226,24 @@ public class GameWorld implements Disposable {
 	public void render(){
 		
 		if(sunLight instanceof DirectionalShadowLight){
-			float s = 30;
+			float s = 50;
 			BoundingBox bbox = new BoundingBox(new Vector3(-s,-s,-s), new Vector3(s,s,s));
 			// ((DirectionalShadowLight) sunLight).setViewport(30, 30, 1f, 100f);
 			// ((DirectionalShadowLight) sunLight).setCenter(Vector3.Zero);
 			((DirectionalShadowLight) sunLight).setBounds(bbox);
-			int shadowMapSize = 2048;
-			((DirectionalShadowLight) sunLight).setShadowMapSize(shadowMapSize, shadowMapSize);
+			// int shadowMapSize = 2048;
+			// ((DirectionalShadowLight) sunLight).setShadowMapSize(shadowMapSize, shadowMapSize);
 			
-			((DirectionalShadowLight) sunLight).setCenter(camera.position);
+			((DirectionalShadowLight) sunLight).setCenter(camera.position.cpy().mulAdd(camera.direction, s * 1f));
 		}
-		sunLight.direction.set(0,-1,0);
+		sunLight.direction.set(2,-3,2).nor();
 		sunLight.baseColor.set(Color.WHITE);
-		sunLight.intensity = 2;
+		sunLight.intensity = 7;
 		sunLight.updateColor();
 		
 		// XXX 
-		sceneManager.environment.set(new PBRFloatAttribute(PBRFloatAttribute.ShadowBias, 1.0f / 255f));
-		sceneManager.setAmbientLight(0.7f);
+		sceneManager.environment.set(new PBRFloatAttribute(PBRFloatAttribute.ShadowBias, 1.0f / 100f));
+		sceneManager.setAmbientLight(0.8f);
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);

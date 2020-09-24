@@ -62,7 +62,7 @@ public class Car {
 			
 			//Vector3 gravity = vec1.set(space.position).nor().sub(space.normal).nor(); //.dot(space.normal);
 			//space.position.mulAdd(gravity, delta * -0.1f);
-			if(changed && game.running){
+			if(changed){
 				space.triangle = navMesh.clipToSurface(space.triangle, space.position, space.normal, direction);
 				if(space.triangle == null) space = null;
 				if(navMesh.clipToSurfaceOnEdge){
@@ -72,7 +72,7 @@ public class Car {
 					Vector3 mirror = direction.cpy().mulAdd(navMesh.clipToSurfaceEdge, -2 * direction.dot(navMesh.clipToSurfaceEdge)).nor();
 					space.position.mulAdd(mirror, 20 * velocity * delta);
 					// direction.lerp(mirror, 1f);
-					if(!mirror.isZero()) direction.lerp(mirror, 0.5f);
+					if(!mirror.isZero() && game.running) direction.lerp(mirror, 0.5f);
 					
 				}
 			}
