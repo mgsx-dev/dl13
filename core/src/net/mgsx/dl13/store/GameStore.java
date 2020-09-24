@@ -11,4 +11,8 @@ public class GameStore {
 		records.truncate(MAX_RECORDS);
 		
 	}
+
+	public void compute() {
+		for(GameRecord r : records) r.validate();
+	}
 }

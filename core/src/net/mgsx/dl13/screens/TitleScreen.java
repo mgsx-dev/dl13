@@ -1,6 +1,7 @@
 package net.mgsx.dl13.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -63,11 +64,11 @@ public class TitleScreen extends StageScreen
 		
 		String[] labels = {"1st", "2nd", "3rd"};
 		for(int i=0 ; i<GameStore.MAX_RECORDS && i<labels.length ; i++){
-			recTable.add(labels[i]).padRight(30).expandX().right();
+			recTable.add(labels[i]).padRight(30).expandX().right().getActor().setColor(Color.LIGHT_GRAY);
 			if(store.records.size <= i){
-				recTable.add("--:--.--");
+				recTable.add("-- -- --").getActor().setColor(Color.BLACK);
 			}else{
-				recTable.add(GameHUD.formatTime(store.records.get(i).score));
+				recTable.add(GameHUD.formatTime(store.records.get(i).score)).getActor().setColor(Color.YELLOW);
 			}
 			recTable.row();
 		}

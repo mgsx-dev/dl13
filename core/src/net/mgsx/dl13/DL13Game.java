@@ -50,6 +50,7 @@ public class DL13Game extends Game {
 		String json = pref.getString(PREF_KEY, null);
 		if(json != null){
 			store = new Json().fromJson(GameStore.class, json);
+			store.compute();
 		}else{
 			store = new GameStore();
 		}
