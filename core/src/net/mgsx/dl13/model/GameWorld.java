@@ -102,7 +102,7 @@ public class GameWorld implements Disposable {
 		sceneManager.addScene(worldScene);
 		
 		// ENV
-		IBL ibl = GameAssets.i.demo2;
+		IBL ibl = worldID.equals("E") ? GameAssets.i.day : (worldID.equals("C") ? GameAssets.i.interior : GameAssets.i.night);
 		
 		sceneManager.environment.set(PBRCubemapAttribute.createDiffuseEnv(ibl.diffuseCubemap));
 		sceneManager.environment.set(PBRCubemapAttribute.createSpecularEnv(ibl.specularCubemap));
@@ -238,12 +238,12 @@ public class GameWorld implements Disposable {
 		}
 		sunLight.direction.set(0,-1,0);
 		sunLight.baseColor.set(Color.WHITE);
-		sunLight.intensity = 1;
+		sunLight.intensity = 2;
 		sunLight.updateColor();
 		
 		// XXX 
 		sceneManager.environment.set(new PBRFloatAttribute(PBRFloatAttribute.ShadowBias, 1.0f / 255f));
-		sceneManager.setAmbientLight(.9f);
+		sceneManager.setAmbientLight(0.7f);
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);

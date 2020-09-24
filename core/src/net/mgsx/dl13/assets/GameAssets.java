@@ -17,7 +17,7 @@ public class GameAssets {
 
 	public Texture brdfLUT;
 
-	public IBL moonlessGolf, demo2;
+	public IBL night, day, interior;
 	
 	private ObjectMap<String, SceneAsset> worldMap = new ObjectMap<String, SceneAsset>();
 
@@ -29,8 +29,9 @@ public class GameAssets {
 		
 		brdfLUT = new Texture(Gdx.files.classpath("net/mgsx/gltf/shaders/brdfLUT.png"));
 		
-		moonlessGolf = new IBL("ibl/moonless_golf_2k");
-		demo2 = new IBL("ibl/demo2");
+		interior = new IBL("ibl/interior", ".png", 7);
+		night = new IBL("ibl/kloppen", ".png", 7);
+		day = new IBL("ibl/kloof", ".png", 7);
 		
 		for(String wID : WORLD_IDS){
 			worldMap.put(wID, new GLTFLoader().load(Gdx.files.internal("models/world" + wID + ".gltf")));

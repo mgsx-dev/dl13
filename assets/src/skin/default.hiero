@@ -1,11 +1,11 @@
 font.name=Noto Sans CJK JP Black
-font.size=24
+font.size=48
 font.bold=false
 font.italic=false
 font.gamma=1.0
 font.mono=true
 
-font2.file=src/skin/national-park/NationalPark-Heavy.otf
+font2.file=src/skin/galiver-sans/GALS.ttf
 font2.use=true
 
 pad.top=1
@@ -17,8 +17,8 @@ pad.advance.y=-2
 
 glyph.native.rendering=false
 glyph.page.width=1000
-glyph.page.height=64
-glyph.text=ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n1234567890 \n.:,
+glyph.page.height=256
+glyph.text=ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n1234567890 \n.:/'-,
 
 render_type=2
 

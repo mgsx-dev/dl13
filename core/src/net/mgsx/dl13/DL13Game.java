@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Json;
 
 import net.mgsx.dl13.assets.GameAssets;
@@ -16,6 +17,11 @@ public class DL13Game extends Game {
 	
 	private static final String PREF_FILE = "dl13";
 	private static final String PREF_KEY = "save";
+	public static final int UIWidth = 1280;
+	public static final int UIHeight = 960;
+	public static final Color skyColor = new Color(.5f, .8f, 1f, 1f);
+	public static final Color neutralColor = new Color(.8f, .8f, .8f, 1f);
+	
 	private GameStore store;
 	
 	public static boolean debug = true;

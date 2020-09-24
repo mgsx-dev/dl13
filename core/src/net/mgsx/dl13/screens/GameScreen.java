@@ -21,7 +21,7 @@ public class GameScreen extends StageScreen {
 	private GameHUD hud;
 	
 	public GameScreen(GameStore store) {
-		super(new FitViewport(640, 480));
+		super(new FitViewport(DL13Game.UIWidth, DL13Game.UIHeight));
 		game = new GameModel(store);
 		int nbBonus = 0;
 		for(String wID : GameAssets.WORLD_IDS){

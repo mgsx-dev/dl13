@@ -47,7 +47,7 @@ public class SelectScreen extends StageScreen {
 	private ButtonGroup<Button> btGroup;
 	
 	public SelectScreen(GameStore store) {
-		super(new FitViewport(640, 480));
+		super(new FitViewport(DL13Game.UIWidth, DL13Game.UIHeight));
 		
 		Skin skin = GameAssets.i.skin;
 		
@@ -56,7 +56,8 @@ public class SelectScreen extends StageScreen {
 		carModels.add(new Scene(GameAssets.i.carC.scene));
 		
 		Table t = new Table(skin);
-		t.add("Select your car").colspan(3);
+		t.defaults().pad(10);
+		t.add("Choose your car").colspan(3);
 		t.row();
 		
 		btGroup = new ButtonGroup<Button>();
@@ -105,7 +106,7 @@ public class SelectScreen extends StageScreen {
 		camera.near = .1f;
 		camera.far = 1000f;
 		
-		IBL ibl = GameAssets.i.demo2;
+		IBL ibl = GameAssets.i.day;
 		
 		sceneManager.environment.set(PBRCubemapAttribute.createDiffuseEnv(ibl.diffuseCubemap));
 		sceneManager.environment.set(PBRCubemapAttribute.createSpecularEnv(ibl.specularCubemap));
@@ -137,9 +138,9 @@ public class SelectScreen extends StageScreen {
 		GameModel.preferredCarStyle = GameModel.CarStyle.values()[index];
 		// animate
 		actor.addAction(Actions.sequence(
-			Actions.moveTo(-10, 0, .5f, Interpolation.pow2),
+			Actions.moveTo(-12, 0, .5f, Interpolation.pow2),
 			Actions.run(()->{
-				actor.setX(10);
+				actor.setX(12);
 				sceneManager.removeScene(carModel);
 				carModel = carModels.get(index);
 				sceneManager.addScene(carModel);
@@ -168,8 +169,7 @@ public class SelectScreen extends StageScreen {
 		
 		sceneManager.update(delta);
 		
-		float lum = .1f;
-		Gdx.gl.glClearColor(lum,lum,lum, 1);
+		Gdx.gl.glClearColor(DL13Game.neutralColor.r, DL13Game.neutralColor.g, DL13Game.neutralColor.b, DL13Game.neutralColor.a);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		sceneManager.render();
 		
