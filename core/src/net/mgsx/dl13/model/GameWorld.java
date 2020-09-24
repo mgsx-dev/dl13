@@ -278,4 +278,8 @@ public class GameWorld implements Disposable {
 		applyCameraPosition();
 		camera.update();
 	}
+
+	public int getBonusCount() {
+		return bonusList.size;
+	}
 }

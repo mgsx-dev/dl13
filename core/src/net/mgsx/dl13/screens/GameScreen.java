@@ -23,10 +23,13 @@ public class GameScreen extends StageScreen {
 	public GameScreen(GameStore store) {
 		super(new FitViewport(640, 480));
 		game = new GameModel(store);
+		int nbBonus = 0;
 		for(String wID : GameAssets.WORLD_IDS){
 			GameWorld w = new GameWorld(game, wID);
 			worldMap.put(wID, w);
+			nbBonus += w.getBonusCount();
 		}
+		System.out.println("TotalBonus: " + nbBonus);
 		setInitWorld("E", "e0");
 		hud = new GameHUD(game, GameAssets.i.skin);
 		stage.addActor(hud);
