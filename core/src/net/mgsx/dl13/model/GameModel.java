@@ -13,7 +13,7 @@ public class GameModel {
 		A,B,C
 	}
 	
-	public static CarStyle preferredCarStyle = CarStyle.B;
+	public static CarStyle preferredCarStyle = CarStyle.A;
 	
 	public final GameStore store;
 	public float time;

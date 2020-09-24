@@ -153,14 +153,14 @@ public class SelectScreen extends StageScreen {
 		
 		time += delta;
 		
-		carModel.modelInstance.transform.setToRotation(Vector3.Y, time * -30)
+		carModel.modelInstance.transform.setToRotation(Vector3.Y, time * -45)
 		.mulLeft(new Matrix4().setToTranslation(actor.getX(), .5f, 0));
 		
 		camera.viewportWidth = Gdx.graphics.getWidth();
 		camera.viewportHeight = Gdx.graphics.getHeight();
 
 		
-		camera.position.set(0, 3, 6);
+		camera.position.set(0, 5, 6);
 		camera.up.set(Vector3.Y);
 		camera.lookAt(new Vector3(0, 2, 0));
 		

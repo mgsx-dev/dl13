@@ -37,7 +37,7 @@
                 0,
                 0
             ],
-            "name" : "CarToonA",
+            "name" : "CarToonC",
             "pbrMetallicRoughness" : {
                 "baseColorTexture" : {
                     "index" : 0,
@@ -89,43 +89,43 @@
     "images" : [
         {
             "mimeType" : "image/png",
-            "name" : "carA-colors",
-            "uri" : "carA-colors.png"
+            "name" : "carC-colors",
+            "uri" : "carC-colors.png"
         }
     ],
     "accessors" : [
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 2247,
+            "count" : 2234,
             "max" : [
-                1.4509556293487549,
-                2.7031185626983643,
-                3.329010009765625
+                1.4556493759155273,
+                2.6750123500823975,
+                3.3284738063812256
             ],
             "min" : [
-                -1.4509556293487549,
-                0.2638378143310547,
-                -2.29046368598938
+                -1.4556493759155273,
+                0.2638896703720093,
+                -2.289111375808716
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 2247,
+            "count" : 2234,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 2247,
+            "count" : 2234,
             "type" : "VEC4"
         },
         {
             "bufferView" : 3,
             "componentType" : 5126,
-            "count" : 2247,
+            "count" : 2234,
             "type" : "VEC2"
         },
         {
@@ -178,53 +178,53 @@
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 26964,
+            "byteLength" : 26808,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 26964,
-            "byteOffset" : 26964
+            "byteLength" : 26808,
+            "byteOffset" : 26808
         },
         {
             "buffer" : 0,
-            "byteLength" : 35952,
-            "byteOffset" : 53928
+            "byteLength" : 35744,
+            "byteOffset" : 53616
         },
         {
             "buffer" : 0,
-            "byteLength" : 17976,
-            "byteOffset" : 89880
+            "byteLength" : 17872,
+            "byteOffset" : 89360
         },
         {
             "buffer" : 0,
             "byteLength" : 12480,
-            "byteOffset" : 107856
+            "byteOffset" : 107232
         },
         {
             "buffer" : 0,
             "byteLength" : 19560,
-            "byteOffset" : 120336
+            "byteOffset" : 119712
         },
         {
             "buffer" : 0,
             "byteLength" : 19560,
-            "byteOffset" : 139896
+            "byteOffset" : 139272
         },
         {
             "buffer" : 0,
             "byteLength" : 26080,
-            "byteOffset" : 159456
+            "byteOffset" : 158832
         },
         {
             "buffer" : 0,
             "byteLength" : 13040,
-            "byteOffset" : 185536
+            "byteOffset" : 184912
         },
         {
             "buffer" : 0,
             "byteLength" : 9984,
-            "byteOffset" : 198576
+            "byteOffset" : 197952
         }
     ],
     "samplers" : [
@@ -235,7 +235,7 @@
     ],
     "buffers" : [
         {
-            "byteLength" : 208560,
+            "byteLength" : 207936,
             "uri" : "carC.bin"
         }
     ]
