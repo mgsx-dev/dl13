@@ -33,11 +33,15 @@ public class Car {
 			float moveSpeed = delta * 2 * 0.1f * 100 * 3;
 			float rotationSpeed = delta * 360 * .5f * .6f;
 			boolean changed = false;
-			if(Gdx.input.isKeyPressed(Input.Keys.UP)){
-				acceleration = 1;
-			}
-			else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-				acceleration = -.5f;
+			if(game.running){
+				if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+					acceleration = 1;
+				}
+				else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+					acceleration = -.5f;
+				}else{
+					acceleration = 0;
+				}
 			}else{
 				acceleration = 0;
 			}
@@ -59,10 +63,13 @@ public class Car {
 			
 			// damping/friction
 			velocity = MathUtils.lerp(velocity, 0, delta * .5f);
-			if(game.running) velocity += acceleration * delta * .3f;
+			if(game.running || game.finishLine) 
+				velocity += acceleration * delta * .3f;
 			velocity = MathUtils.clamp(velocity, -moveSpeed/2, moveSpeed);
+			
 			space.position.mulAdd(direction, velocity);
 			changed = true;
+			
 			
 			//Vector3 gravity = vec1.set(space.position).nor().sub(space.normal).nor(); //.dot(space.normal);
 			//space.position.mulAdd(gravity, delta * -0.1f);
@@ -79,7 +86,7 @@ public class Car {
 					if(!mirror.isZero() && game.running) direction.lerp(mirror, 0.5f);
 					
 					if(collisionTimeout <= 0 && game.running){
-						GameAssets.i.collisionSound.play();
+						GameAssets.i.collisionSound.play(0.7f);
 						collisionTimeout = .3f;
 					}
 				}
@@ -87,14 +94,17 @@ public class Car {
 			
 			// XXX 
 			if(direction.isZero()){
-				direction.set(1,0,0);
+				direction.set(1,1,1).nor();
 			}
 			
-			float s = 1f;
-			scene.modelInstance.transform.idt()
-			.setToLookAt(space.position, space.position.cpy().mulAdd(direction, -1), space.normal)
-			.inv()
-			.scale(s, s, s);
+			// XXX non invertible matrix workaround
+			try{
+				scene.modelInstance.transform.idt()
+				.setToLookAt(space.position, space.position.cpy().mulAdd(direction, -1), space.normal)
+				.inv();
+			}catch(RuntimeException e){
+				scene.modelInstance.transform.setToTranslation(space.position);
+			}
 		}
 	}
 

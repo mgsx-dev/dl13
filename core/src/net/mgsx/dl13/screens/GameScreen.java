@@ -63,8 +63,9 @@ public class GameScreen extends StageScreen {
 		}
 		
 		float t = Math.abs(world.player.velocity) / 0.6f;
-		float pitch = MathUtils.lerp(.1f, 2, t);
-		GameAssets.i.carSound.setVolume(carSoundID, 1);
+		float pitch = MathUtils.lerp(.4f, 2f, t * t * t);
+		float vol = MathUtils.lerp(.4f, .25f, t * t);
+		GameAssets.i.carSound.setVolume(carSoundID, vol);
 		GameAssets.i.carSound.setPitch(carSoundID, pitch);
 		// GameAssets.i.carSound.setLooping(carSoundID, true);
 		// GameAssets.i.carSound.play();

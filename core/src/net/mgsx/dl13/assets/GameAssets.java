@@ -28,7 +28,7 @@ public class GameAssets {
 	public Sound carSound, collisionSound, inSound, outSound, bonusSoundSoft, bonusSoundHard, uiSound, finishSound;
 	public Music mainSong;
 
-	private Music currentSong;
+	private Music currentSong, introSong;
 	
 	public GameAssets() {
 		
@@ -50,7 +50,7 @@ public class GameAssets {
 		
 		bonus = new GLTFLoader().load(Gdx.files.internal("models/bonus.gltf"));
 		
-		carSound = Gdx.audio.newSound(Gdx.files.internal("sfx/cars3.wav")); // le 3 est bien
+		carSound = Gdx.audio.newSound(Gdx.files.internal("sfx/cars3.wav"));
 		inSound = Gdx.audio.newSound(Gdx.files.internal("sfx/in.wav"));
 		outSound = Gdx.audio.newSound(Gdx.files.internal("sfx/out.wav"));
 		collisionSound = Gdx.audio.newSound(Gdx.files.internal("sfx/collision.wav"));
@@ -60,7 +60,8 @@ public class GameAssets {
 		finishSound = Gdx.audio.newSound(Gdx.files.internal("sfx/good.mp3"));
 
 		
-		mainSong = Gdx.audio.newMusic(Gdx.files.internal("music/MRmenu1.mp3"));
+		mainSong = Gdx.audio.newMusic(Gdx.files.internal("music/MRsong.mp3"));
+		introSong = Gdx.audio.newMusic(Gdx.files.internal("music/MRmenu.mp3"));
 		
 	}
 
@@ -80,7 +81,7 @@ public class GameAssets {
 		
 	}
 	public void playSongMenu() {
-		playSong(mainSong);
+		playSong(introSong);
 	}
 	private void playSong(Music song){
 		if(currentSong == song) return;

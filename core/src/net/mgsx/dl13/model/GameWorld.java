@@ -207,7 +207,7 @@ public class GameWorld implements Disposable {
 			}
 		}
 		if(bonusHitList.size > 0){
-			GameAssets.i.bonusSoundHard.play(.5f);
+			GameAssets.i.bonusSoundHard.play(.3f);
 		}
 		for(Bonus bonus : bonusHitList){
 			bonusList.removeValue(bonus, true);
