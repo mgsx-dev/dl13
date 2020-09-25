@@ -24,7 +24,7 @@ public class DL13Game extends Game {
 	
 	private GameStore store;
 	
-	public static boolean debug = true;
+	public static boolean debug = false;
 	
 	public static enum ScreenState{
 		TITLE, SELECT, GAME
