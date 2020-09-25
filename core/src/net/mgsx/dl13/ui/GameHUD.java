@@ -111,7 +111,7 @@ public class GameHUD extends Table
 		GameRecord currentRecord = game.record;
 		Table t = new Table(getSkin());
 		
-		t.setBackground("default-scroll");
+		t.setBackground("default-rect");
 		t.defaults().pad(10);
 		
 		Array<Actor> actors = new Array<Actor>();

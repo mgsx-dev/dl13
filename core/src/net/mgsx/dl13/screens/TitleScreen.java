@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -105,7 +106,10 @@ public class TitleScreen extends StageScreen
 			public void changed(ChangeEvent event, Actor actor) {
 				GameAssets.i.playUI();
 				InputsUI ui = new InputsUI(DL13Game.getInputs(), skin);
+//				ui.pack();
+//				ui.setPosition(stage.getWidth()/2, stage.getHeight()/2, Align.center);
 				ui.setFillParent(true);
+				ui.setTouchable(Touchable.enabled);
 				stage.addActor(ui);
 			}
 		});
@@ -114,7 +118,10 @@ public class TitleScreen extends StageScreen
 			public void changed(ChangeEvent event, Actor actor) {
 				GameAssets.i.playUI();
 				SettingsUI ui = new SettingsUI(store, skin);
+//				ui.pack();
+//				ui.setPosition(stage.getWidth()/2, stage.getHeight()/2, Align.center);
 				ui.setFillParent(true);
+				ui.setTouchable(Touchable.enabled);
 				stage.addActor(ui);
 			}
 		});
