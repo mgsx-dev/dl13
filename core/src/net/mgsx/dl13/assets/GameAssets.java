@@ -25,10 +25,12 @@ public class GameAssets {
 
 	public Skin skin;
 	
-	public Sound carSound, collisionSound, inSound, outSound, bonusSoundSoft, bonusSoundHard, uiSound, finishSound;
+	public Sound carSound, collisionSound, inSound, outSound, bonusSoundSoft, bonusSoundHard, uiSound, finishSound, sndCoin;
 	public Music mainSong;
 
 	private Music currentSong, introSong;
+	
+	public SceneAsset badlog;
 	
 	public GameAssets() {
 		
@@ -58,10 +60,12 @@ public class GameAssets {
 		bonusSoundHard = Gdx.audio.newSound(Gdx.files.internal("sfx/bonus3.wav"));
 		uiSound = Gdx.audio.newSound(Gdx.files.internal("sfx/ui-short.wav"));
 		finishSound = Gdx.audio.newSound(Gdx.files.internal("sfx/good.mp3"));
-
+		sndCoin = Gdx.audio.newSound(Gdx.files.internal("sfx/bonus1.wav"));
 		
 		mainSong = Gdx.audio.newMusic(Gdx.files.internal("music/MRsong.mp3"));
 		introSong = Gdx.audio.newMusic(Gdx.files.internal("music/MRmenu.mp3"));
+		
+		badlog = new GLTFLoader().load(Gdx.files.internal("models/badlog.gltf"));
 		
 	}
 

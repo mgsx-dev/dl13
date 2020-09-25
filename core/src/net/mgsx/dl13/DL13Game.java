@@ -2,6 +2,7 @@ package net.mgsx.dl13;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.utils.Json;
 
 import net.mgsx.dl13.assets.GameAssets;
 import net.mgsx.dl13.screens.GameScreen;
+import net.mgsx.dl13.screens.LogoScreen;
 import net.mgsx.dl13.screens.SelectScreen;
 import net.mgsx.dl13.screens.TitleScreen;
 import net.mgsx.dl13.store.GameStore;
@@ -27,7 +29,7 @@ public class DL13Game extends Game {
 	public static boolean debug = false;
 	
 	public static enum ScreenState{
-		TITLE, SELECT, GAME
+		LOGO, TITLE, SELECT, GAME
 	}
 
 	private ScreenState nextState; 
@@ -40,7 +42,7 @@ public class DL13Game extends Game {
 	public void create () {
 		GameAssets.i = new GameAssets();
 		loadStore();
-		setScreenState(ScreenState.TITLE);
+		setScreenState(ScreenState.LOGO);
 		// setScreenState(ScreenState.GAME);
 		// setScreenState(ScreenState.SELECT);
 	}
@@ -80,12 +82,18 @@ public class DL13Game extends Game {
 		case TITLE:
 			setScreen(new TitleScreen(store));
 			break;
+		case LOGO:
+			setScreen(new LogoScreen(store));
+			break;
 		}
 		if(lastScreen != null) lastScreen.dispose();
 	}
 
 	@Override
 	public void render() {
+		if(debug && Gdx.input.isKeyJustPressed(Input.Keys.L)){
+			toScreen(ScreenState.LOGO);
+		}
 		super.render();
 		if(nextState != null){
 			setScreenState(nextState);
