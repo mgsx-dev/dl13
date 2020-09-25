@@ -1,5 +1,7 @@
 package net.mgsx.dl13.ui;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -23,6 +25,8 @@ public class SettingsUI extends Table {
 		defaults().pad(20);
 		
 		TextButton btOK = new TextButton("OK", skin);
+		TextButton btFullscreen = new TextButton("Fullscreen", skin, "toggle");
+		btFullscreen.setChecked(Gdx.graphics.isFullscreen());
 		
 		shadowSelector = new SelectBox<Integer>(skin);
 		Array<Integer> items = new Array<Integer>();
@@ -32,6 +36,14 @@ public class SettingsUI extends Table {
 		
 		add("Shadow map size");
 		add(shadowSelector).row();
+		
+		add("Display");
+		add(btFullscreen).row();
+		
+		add("Press F12 key to enter fullscreen").colspan(2).getActor().setColor(Color.GRAY);
+		row();
+		add("Press ESC key to exit fullscreen").colspan(2).getActor().setColor(Color.GRAY);
+		row();
 		
 		add(btOK).colspan(2).row();
 		
@@ -47,6 +59,17 @@ public class SettingsUI extends Table {
 			public void changed(ChangeEvent event, Actor actor) {
 				DL13Game.save();
 				DL13Game.toScreen(ScreenState.TITLE);
+			}
+		});
+		
+		btFullscreen.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				if(Gdx.graphics.isFullscreen()){
+					Gdx.graphics.setWindowedMode(640, 480);
+				}else{
+					Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+				}
 			}
 		});
 	}
