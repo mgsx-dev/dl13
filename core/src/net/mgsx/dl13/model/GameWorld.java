@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.model.Node;
+import com.badlogic.gdx.graphics.g3d.shaders.DepthShader;
+import com.badlogic.gdx.graphics.g3d.shaders.DepthShader.Config;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
@@ -31,6 +33,10 @@ import net.mgsx.gltf.scene3d.scene.Scene;
 import net.mgsx.gltf.scene3d.scene.SceneAsset;
 import net.mgsx.gltf.scene3d.scene.SceneManager;
 import net.mgsx.gltf.scene3d.scene.SceneSkybox;
+import net.mgsx.gltf.scene3d.shaders.PBRDepthShaderProvider;
+import net.mgsx.gltf.scene3d.shaders.PBRShaderConfig;
+import net.mgsx.gltf.scene3d.shaders.PBRShaderConfig.SRGB;
+import net.mgsx.gltf.scene3d.shaders.PBRShaderProvider;
 
 public class GameWorld implements Disposable {
 	
@@ -61,7 +67,18 @@ public class GameWorld implements Disposable {
 		this.game = game;
 		player = new Car(game);
 		
-		sceneManager = new SceneManager(12);
+		PBRShaderConfig config = PBRShaderProvider.createDefaultConfig();
+		config.numBones = 0;
+		config.numSpotLights = 0;
+		config.numDirectionalLights = 1;
+		config.manualSRGB = SRGB.FAST;
+		config.useTangentSpace = true;
+		
+		
+		Config depthConfig = new DepthShader.Config();
+		depthConfig.numBones = 0;
+		
+		sceneManager = new SceneManager(PBRShaderProvider.createDefault(config), new PBRDepthShaderProvider(depthConfig));
 		sceneManager.camera = camera = new PerspectiveCamera(60, 1, 1);
 		camera.position.set(100, 100, 100);
 		camera.up.set(Vector3.Y);
@@ -122,8 +139,13 @@ public class GameWorld implements Disposable {
 		
 		// NAVMESH
 		MeshIndexer indexer = new MeshIndexer();
-		FloatArray points = indexer.extractVertices(worldScene.modelInstance.getNode(navMeshName));
+		Node navMeshNode = worldScene.modelInstance.getNode(navMeshName);
+		FloatArray points = indexer.extractVertices(navMeshNode);
 		navMesh = indexer.build(points, MathUtils.FLOAT_ROUNDING_ERROR);
+		
+		if(worldID.equals("E")){
+			worldScene.modelInstance.nodes.removeValue(navMeshNode, true);
+		}
 		
 		// STARTUP POINT
 		// player.space = navMesh.rayCast(new Ray(new Vector3(0, 1000, 0), new Vector3(0,-1,0)));
@@ -229,7 +251,7 @@ public class GameWorld implements Disposable {
 	public void render(){
 		
 		if(sunLight instanceof DirectionalShadowLight){
-			float s = 50;
+			float s = 60;
 			BoundingBox bbox = new BoundingBox(new Vector3(-s,-s,-s), new Vector3(s,s,s));
 			// ((DirectionalShadowLight) sunLight).setViewport(30, 30, 1f, 100f);
 			// ((DirectionalShadowLight) sunLight).setCenter(Vector3.Zero);

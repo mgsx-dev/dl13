@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.utils.Json;
 
 import net.mgsx.dl13.assets.GameAssets;
@@ -29,12 +30,14 @@ public class DL13Game extends Game {
 	private GameInputs inputManager;
 	
 	public static boolean debug = false;
+	public static boolean perf = false;
 	
 	public static enum ScreenState{
 		LOGO, TITLE, SELECT, GAME
 	}
 
-	private ScreenState nextState; 
+	private ScreenState nextState;
+	private FPSLogger fpsLogger; 
 	
 	public static void save(){
 		((DL13Game)Gdx.app.getApplicationListener()).saveStore();
@@ -46,6 +49,8 @@ public class DL13Game extends Game {
 
 	@Override
 	public void create () {
+		fpsLogger = new FPSLogger();
+		
 		GameAssets.i = new GameAssets();
 		loadStore();
 		
@@ -109,6 +114,7 @@ public class DL13Game extends Game {
 			setScreenState(nextState);
 			nextState = null;
 		}
+		if(perf) fpsLogger.log();
 	}
 
 }

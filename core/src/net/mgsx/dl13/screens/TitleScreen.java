@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g3d.shaders.DepthShader;
+import com.badlogic.gdx.graphics.g3d.shaders.DepthShader.Config;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -35,6 +37,10 @@ import net.mgsx.gltf.scene3d.lights.DirectionalShadowLight;
 import net.mgsx.gltf.scene3d.scene.Scene;
 import net.mgsx.gltf.scene3d.scene.SceneManager;
 import net.mgsx.gltf.scene3d.scene.SceneSkybox;
+import net.mgsx.gltf.scene3d.shaders.PBRDepthShaderProvider;
+import net.mgsx.gltf.scene3d.shaders.PBRShaderConfig;
+import net.mgsx.gltf.scene3d.shaders.PBRShaderConfig.SRGB;
+import net.mgsx.gltf.scene3d.shaders.PBRShaderProvider;
 
 public class TitleScreen extends StageScreen
 {
@@ -128,7 +134,19 @@ public class TitleScreen extends StageScreen
 		
 		// SCENE
 		
-		sceneManager = new SceneManager(12);
+		PBRShaderConfig config = PBRShaderProvider.createDefaultConfig();
+		config.numBones = 0;
+		config.numSpotLights = 0;
+		config.numDirectionalLights = 1;
+		config.manualSRGB = SRGB.FAST;
+		config.useTangentSpace = true;
+		
+		
+		Config depthConfig = new DepthShader.Config();
+		depthConfig.numBones = 0;
+		
+		sceneManager = new SceneManager(PBRShaderProvider.createDefault(config), new PBRDepthShaderProvider(depthConfig));
+		
 		sceneManager.camera = camera = new PerspectiveCamera(60, 1, 1);
 		camera.position.set(100, 100, 100);
 		camera.up.set(Vector3.Y);
