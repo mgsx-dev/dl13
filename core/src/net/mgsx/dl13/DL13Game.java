@@ -21,8 +21,8 @@ public class DL13Game extends Game {
 	
 	private static final String PREF_FILE = "dl13";
 	private static final String PREF_KEY = "save";
-	public static final int UIWidth = 1280;
-	public static final int UIHeight = 960;
+	public static final int UIWidth = 1282;
+	public static final int UIHeight = 962;
 	public static final Color skyColor = new Color(.5f, .8f, 1f, 1f);
 	public static final Color neutralColor = new Color(.8f, .8f, .8f, 1f);
 	
