@@ -234,8 +234,8 @@ public class GameWorld implements Disposable {
 			// ((DirectionalShadowLight) sunLight).setViewport(30, 30, 1f, 100f);
 			// ((DirectionalShadowLight) sunLight).setCenter(Vector3.Zero);
 			((DirectionalShadowLight) sunLight).setBounds(bbox);
-			// int shadowMapSize = 2048;
-			// ((DirectionalShadowLight) sunLight).setShadowMapSize(shadowMapSize, shadowMapSize);
+			int shadowMapSize = 2048;
+			((DirectionalShadowLight) sunLight).setShadowMapSize(shadowMapSize, shadowMapSize);
 			
 			((DirectionalShadowLight) sunLight).setCenter(camera.position.cpy().mulAdd(camera.direction, s * 1f));
 		}
