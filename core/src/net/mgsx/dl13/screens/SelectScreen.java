@@ -119,7 +119,7 @@ public class SelectScreen extends StageScreen {
 		
 		sceneManager.setAmbientLight(1f);
 		
-		boolean shadows = true;
+		boolean shadows = false;
 		sunLight = shadows ? new DirectionalShadowLight() : new DirectionalLightEx();
 		sunLight.direction.set(0,-1,0);
 		sceneManager.environment.add(sunLight);
@@ -173,10 +173,11 @@ public class SelectScreen extends StageScreen {
 		camera.up.set(Vector3.Y);
 		camera.lookAt(new Vector3(0, 2, 0));
 		
-		camera.update();
+		camera.update(true);
 		
 		sceneManager.update(delta);
 		
+		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClearColor(DL13Game.neutralColor.r, DL13Game.neutralColor.g, DL13Game.neutralColor.b, DL13Game.neutralColor.a);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		sceneManager.render();

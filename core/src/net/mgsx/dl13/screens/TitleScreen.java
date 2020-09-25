@@ -108,7 +108,7 @@ public class TitleScreen extends StageScreen
 		sceneManager.setAmbientLight(1f);
 		
 		boolean shadows = true;
-		sunLight = shadows ? new DirectionalShadowLight() : new DirectionalLightEx();
+		sunLight = shadows ? new DirectionalShadowLight(store.getShadowMapSize(), store.getShadowMapSize()) : new DirectionalLightEx();
 		sunLight.direction.set(0,-1,0);
 		sceneManager.environment.add(sunLight);
 		
@@ -135,16 +135,7 @@ public class TitleScreen extends StageScreen
 		if(sunLight instanceof DirectionalShadowLight){
 			float s = 300;
 			BoundingBox bbox = new BoundingBox(new Vector3(-s,-s,-s), new Vector3(s,s,s));
-			// ((DirectionalShadowLight) sunLight).setViewport(30, 30, 1f, 100f);
-			// ((DirectionalShadowLight) sunLight).setCenter(Vector3.Zero);
-			
 			((DirectionalShadowLight) sunLight).setBounds(bbox);
-			/*
-			int shadowMapSize = 2048;
-			((DirectionalShadowLight) sunLight).setShadowMapSize(shadowMapSize, shadowMapSize);
-			
-			((DirectionalShadowLight) sunLight).setCenter(Vector3.Zero);
-			*/
 			sceneManager.environment.set(new PBRFloatAttribute(PBRFloatAttribute.ShadowBias, 1 / 50f));
 		}
 		sunLight.intensity = 3;
@@ -164,6 +155,7 @@ public class TitleScreen extends StageScreen
 		
 		sceneManager.update(delta);
 		
+		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClearColor(DL13Game.skyColor.r, DL13Game.skyColor.g, DL13Game.skyColor.b, DL13Game.skyColor.a);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		sceneManager.render();

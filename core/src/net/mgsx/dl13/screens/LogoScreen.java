@@ -139,6 +139,7 @@ public class LogoScreen extends StageScreen
 		
 		float l = MathUtils.lerp(.1f, 1f, lightEffectSmooth);
 		Gdx.gl.glClearColor(l,l,l,0);
+		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		sceneManager.render();
 		

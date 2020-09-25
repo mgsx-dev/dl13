@@ -76,6 +76,7 @@ public class GameScreen extends StageScreen {
 		
 		world.update(delta);
 		
+		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		world.render();
 		
 		viewport.apply();
