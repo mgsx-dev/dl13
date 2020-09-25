@@ -21,8 +21,10 @@ import net.mgsx.dl13.DL13Game;
 import net.mgsx.dl13.DL13Game.ScreenState;
 import net.mgsx.dl13.assets.GameAssets;
 import net.mgsx.dl13.assets.IBL;
+import net.mgsx.dl13.inputs.ui.InputsUI;
 import net.mgsx.dl13.store.GameStore;
 import net.mgsx.dl13.ui.GameHUD;
+import net.mgsx.dl13.ui.SettingsUI;
 import net.mgsx.dl13.utils.StageScreen;
 import net.mgsx.gltf.scene3d.attributes.PBRCubemapAttribute;
 import net.mgsx.gltf.scene3d.attributes.PBRFloatAttribute;
@@ -54,13 +56,22 @@ public class TitleScreen extends StageScreen
 		
 		Table t = new Table(skin);
 		t.defaults().pad(6);
-		t.add(new Label("Multiverse\nRacer", skin, "title")).padTop(100).getActor().setAlignment(Align.center);
+		t.add(new Label("Multiverse\nRacer", skin, "title")).padTop(50).getActor().setAlignment(Align.center);
 		t.row();
 		
-		t.add(btPlay).expandY().bottom().row();
+		
+		Table tbts = new Table(skin);
+		tbts.defaults().pad(6);
+		
+		tbts.add(btPlay).row();
+		
+		TextButton btControls = new TextButton("Controls", skin);
+		tbts.add(btControls).row();
+		TextButton btSettings = new TextButton("Settings", skin);
+		tbts.add(btSettings).row();
 		
 		Table recTable = new Table(skin);
-		recTable.defaults().pad(4);
+		recTable.defaults().pad(6);
 		
 		String[] labels = {"1st", "2nd", "3rd"};
 		for(int i=0 ; i<GameStore.MAX_RECORDS && i<labels.length ; i++){
@@ -73,7 +84,11 @@ public class TitleScreen extends StageScreen
 			recTable.row();
 		}
 		
-		t.add(recTable).padBottom(50).row();
+		Table subTable = new Table(skin);
+		subTable.add(tbts).padRight(50);
+		subTable.add(recTable).padLeft(50);
+		
+		t.add(subTable).expandY().bottom().padBottom(50).row();
 		
 		stage.addActor(t);
 		t.setFillParent(true);
@@ -81,8 +96,26 @@ public class TitleScreen extends StageScreen
 		btPlay.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				GameAssets.i.playUI();
+				GameAssets.i.playUIHard();
 				DL13Game.toScreen(ScreenState.SELECT);
+			}
+		});
+		btControls.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				GameAssets.i.playUI();
+				InputsUI ui = new InputsUI(DL13Game.getInputs(), skin);
+				ui.setFillParent(true);
+				stage.addActor(ui);
+			}
+		});
+		btSettings.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				GameAssets.i.playUI();
+				SettingsUI ui = new SettingsUI(store, skin);
+				ui.setFillParent(true);
+				stage.addActor(ui);
 			}
 		});
 		

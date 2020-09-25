@@ -1,10 +1,9 @@
 package net.mgsx.dl13.model;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 
+import net.mgsx.dl13.DL13Game;
 import net.mgsx.dl13.assets.GameAssets;
 import net.mgsx.dl13.navmesh.NavMesh;
 import net.mgsx.dl13.navmesh.NavMesh.RayCastResult;
@@ -29,16 +28,18 @@ public class Car {
 	public void updateAsPlayer(NavMesh navMesh, float delta){
 		collisionTimeout -= delta;
 		
+		GameInputs inputs = DL13Game.getInputs();
+		
 		if(space != null){
 			float moveSpeed = delta * 2 * 0.1f * 100 * 3;
 			float rotationSpeed = delta * 360 * .5f * .6f;
 			boolean changed = false;
 			if(game.running){
-				if(Gdx.input.isKeyPressed(Input.Keys.UP)){
-					acceleration = 1;
-				}
-				else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+				if(inputs.controller.isOn(GameInputs.PlayerCommand.BRAKE)){
 					acceleration = -.5f;
+				}
+				else if(inputs.controller.isOn(GameInputs.PlayerCommand.ACCEL)){
+					acceleration = 1;
 				}else{
 					acceleration = 0;
 				}
@@ -50,13 +51,22 @@ public class Car {
 			
 			if(game.running){
 				float friction = .999f;
-				if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-					direction.rotate(space.normal, rotationSpeed);
-					velocity *= friction;
+				float rLeft = inputs.controller.getAnalog(GameInputs.PlayerCommand.LEFT);
+				float rRight = inputs.controller.getAnalog(GameInputs.PlayerCommand.RIGHT);
+				
+//				System.out.println(rLeft + " " + rRight);
+//				System.out.println(inputs.controller.isOn(GameInputs.PlayerCommand.LEFT));
+				
+				float epsilon = 0.01f;
+				if(rLeft > epsilon){
+					float fric = MathUtils.lerp(1, friction, rLeft);
+					direction.rotate(space.normal, rotationSpeed * rLeft);
+					velocity *= fric;
 				}
-				if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-					direction.rotate(space.normal, -rotationSpeed);
-					velocity *= friction;
+				if(rRight > epsilon){
+					float fric = MathUtils.lerp(1, friction, rRight);
+					direction.rotate(space.normal, -rotationSpeed * rRight);
+					velocity *= fric;
 				}
 				
 			}

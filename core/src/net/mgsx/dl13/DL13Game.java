@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Json;
 
 import net.mgsx.dl13.assets.GameAssets;
+import net.mgsx.dl13.model.GameInputs;
 import net.mgsx.dl13.screens.GameScreen;
 import net.mgsx.dl13.screens.LogoScreen;
 import net.mgsx.dl13.screens.SelectScreen;
@@ -25,6 +26,7 @@ public class DL13Game extends Game {
 	public static final Color neutralColor = new Color(.8f, .8f, .8f, 1f);
 	
 	private GameStore store;
+	private GameInputs inputManager;
 	
 	public static boolean debug = false;
 	
@@ -37,11 +39,19 @@ public class DL13Game extends Game {
 	public static void save(){
 		((DL13Game)Gdx.app.getApplicationListener()).saveStore();
 	}
+	
+	public static GameInputs getInputs(){
+		return ((DL13Game)Gdx.app.getApplicationListener()).inputManager;
+	}
 
 	@Override
 	public void create () {
 		GameAssets.i = new GameAssets();
 		loadStore();
+		
+		inputManager = new GameInputs(Gdx.app.getPreferences(PREF_FILE));
+		
+		// setScreenState(ScreenState.TITLE);
 		setScreenState(ScreenState.LOGO);
 		// setScreenState(ScreenState.GAME);
 		// setScreenState(ScreenState.SELECT);

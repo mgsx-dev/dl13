@@ -55,6 +55,8 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         
+        compile "com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion"
+		compile "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
     }
 }
 
@@ -96,7 +98,12 @@ project(":html") {
         compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
         compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
+     
+     	compile "com.github.mgsx-dev.gdx-gltf:gltf:$gltfVersion:sources"
         
+        compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion:sources"
+		compile "com.badlogicgames.gdx:gdx-controllers-gwt:$gdxVersion"
+		compile "com.badlogicgames.gdx:gdx-controllers-gwt:$gdxVersion:sources"   
     }
 }
 
@@ -107,6 +114,7 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.github.mgsx-dev.gdx-gltf:gltf:$gltfVersion"
+        compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         
         testCompile "junit:junit:$junitVersion"
         testCompile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
