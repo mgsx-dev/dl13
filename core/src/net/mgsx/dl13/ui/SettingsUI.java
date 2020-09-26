@@ -40,9 +40,7 @@ public class SettingsUI extends Table {
 		add("Display");
 		add(btFullscreen).row();
 		
-		add("Press F12 key to enter fullscreen").colspan(2).getActor().setColor(Color.GRAY);
-		row();
-		add("Press ESC key to exit fullscreen").colspan(2).getActor().setColor(Color.GRAY);
+		add("Press F key to toggle fullscreen").colspan(2).getActor().setColor(Color.GRAY);
 		row();
 		
 		add(btOK).colspan(2).row();

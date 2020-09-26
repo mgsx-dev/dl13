@@ -2,4 +2,12 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit trunk//EN" "http://google-web-toolkit.googlecode.com/svn/trunk/distro-source/core/src/gwt-module.dtd">
 <module>
 	<source path="net/mgsx/dl13" />
+	
+	<inherits name='GLTF' />
+	<inherits name="com.badlogic.gdx.controllers.controllers-gwt"/>
+	
+	<extend-configuration-property name="gdx.reflect.include" value="net.mgsx.dl13.inputs.store" />
+	<extend-configuration-property name="gdx.reflect.include" value="net.mgsx.dl13.store" />
+	
+	<extend-configuration-property name="gdx.files.classpath" value="gdx-pbr.fs.glsl" />
 </module>

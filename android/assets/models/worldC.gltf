@@ -16,7 +16,7 @@
                     "export_format" : "GLTF_SEPARATE",
                     "export_lights" : 1,
                     "export_morph_tangent" : 1,
-                    "export_tangents" : 1
+                    "export_tangents" : 0
                 }
             },
             "name" : "Scene",
@@ -442,8 +442,8 @@
                     0.800000011920929,
                     1
                 ],
-                "metallicFactor" : 0.37727272510528564,
-                "roughnessFactor" : 0.16818180680274963
+                "metallicFactor" : 0.5,
+                "roughnessFactor" : 0.12272725999355316
             }
         },
         {

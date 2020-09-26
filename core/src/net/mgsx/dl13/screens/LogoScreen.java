@@ -53,11 +53,13 @@ public class LogoScreen extends StageScreen
 		scene = new Scene(GameAssets.i.badlog.scene);
 		
 		PBRShaderConfig config = PBRShaderProvider.createDefaultConfig();
+		config.fragmentShader = Gdx.files.classpath("gdx-pbr.fs.glsl").readString();
 		config.numBones = 24;
 		config.numSpotLights = 0;
+		config.numPointLights = 0;
 		config.numDirectionalLights = 1;
 		config.manualSRGB = SRGB.FAST;
-		config.useTangentSpace = true;
+		config.useTangentSpace = false;
 		
 		
 		Config depthConfig = new DepthShader.Config();

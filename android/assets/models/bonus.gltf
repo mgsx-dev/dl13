@@ -16,7 +16,7 @@
                     "export_format" : "GLTF_SEPARATE",
                     "export_lights" : 1,
                     "export_morph_tangent" : 1,
-                    "export_tangents" : 1
+                    "export_tangents" : 0
                 }
             },
             "name" : "Scene",
@@ -33,7 +33,6 @@
     ],
     "materials" : [
         {
-            "doubleSided" : true,
             "emissiveFactor" : [
                 1,
                 0,
@@ -60,10 +59,9 @@
                     "attributes" : {
                         "POSITION" : 0,
                         "NORMAL" : 1,
-                        "TANGENT" : 2,
-                        "TEXCOORD_0" : 3
+                        "TEXCOORD_0" : 2
                     },
-                    "indices" : 4,
+                    "indices" : 3,
                     "material" : 0
                 }
             ]
@@ -96,16 +94,10 @@
             "bufferView" : 2,
             "componentType" : 5126,
             "count" : 60,
-            "type" : "VEC4"
-        },
-        {
-            "bufferView" : 3,
-            "componentType" : 5126,
-            "count" : 60,
             "type" : "VEC2"
         },
         {
-            "bufferView" : 4,
+            "bufferView" : 3,
             "componentType" : 5123,
             "count" : 60,
             "type" : "SCALAR"
@@ -124,23 +116,18 @@
         },
         {
             "buffer" : 0,
-            "byteLength" : 960,
+            "byteLength" : 480,
             "byteOffset" : 1440
         },
         {
             "buffer" : 0,
-            "byteLength" : 480,
-            "byteOffset" : 2400
-        },
-        {
-            "buffer" : 0,
             "byteLength" : 120,
-            "byteOffset" : 2880
+            "byteOffset" : 1920
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 3000,
+            "byteLength" : 2040,
             "uri" : "bonus.bin"
         }
     ]

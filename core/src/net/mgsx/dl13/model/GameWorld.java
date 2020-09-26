@@ -68,14 +68,17 @@ public class GameWorld implements Disposable {
 		player = new Car(game);
 		
 		PBRShaderConfig config = PBRShaderProvider.createDefaultConfig();
+		config.fragmentShader = Gdx.files.classpath("gdx-pbr.fs.glsl").readString();
 		config.numBones = 0;
 		config.numSpotLights = 0;
+		config.numPointLights = 0;
 		config.numDirectionalLights = 1;
 		config.manualSRGB = SRGB.FAST;
-		config.useTangentSpace = true;
+		config.useTangentSpace = false;
 		
 		
 		Config depthConfig = new DepthShader.Config();
+		depthConfig.defaultCullFace = 0;
 		depthConfig.numBones = 0;
 		
 		sceneManager = new SceneManager(PBRShaderProvider.createDefault(config), new PBRDepthShaderProvider(depthConfig));
@@ -135,7 +138,6 @@ public class GameWorld implements Disposable {
 		sunLight.direction.set(0,-1,0);
 		sceneManager.environment.add(sunLight);
 		
-		sceneManager.setSkyBox(skybox);
 		
 		// NAVMESH
 		MeshIndexer indexer = new MeshIndexer();
@@ -191,7 +193,7 @@ public class GameWorld implements Disposable {
 	public void update(float delta){
 		
 		if(DL13Game.debug){
-			if(Gdx.input.isKeyJustPressed(Input.Keys.F)){
+			if(Gdx.input.isKeyJustPressed(Input.Keys.H)){
 				camera.fieldOfView = 170;
 			}
 		}

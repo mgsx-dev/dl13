@@ -109,15 +109,11 @@ public class DL13Game extends Game {
 		if(debug && Gdx.input.isKeyJustPressed(Input.Keys.L)){
 			toScreen(ScreenState.LOGO);
 		}
-		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-			if(Gdx.graphics.isFullscreen()){
-				Gdx.graphics.setWindowedMode(640, 480);
-			}
+		if((Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) || Gdx.input.isKeyJustPressed(Input.Keys.F)) && Gdx.graphics.isFullscreen()){
+			Gdx.graphics.setWindowedMode(640, 480);
 		}
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F12)){
-			if(!Gdx.graphics.isFullscreen()){
-				Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-			}
+		else if(Gdx.input.isKeyJustPressed(Input.Keys.F) && !Gdx.graphics.isFullscreen()){
+			Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		}
 		super.render();
 		if(nextState != null){

@@ -45,7 +45,16 @@ public class InputsUI extends Table
 		
 		add("CONTROLLER SETTINGS").row();
 		
-		controllerSelector = new SelectBox<ControllerBase>(skin);
+		controllerSelector = new SelectBox<ControllerBase>(skin){
+			@Override
+			protected String toString(ControllerBase item) {
+				String name = item.toString();
+				if(name.length() > 16){
+					return name.substring(0, 16) + "...";
+				}
+				return name;
+			}
+		};
 		controllerSelector.setItems(inputs.controllers);
 		controllerSelector.setSelected(inputs.controller);
 		
